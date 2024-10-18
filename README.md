@@ -22,6 +22,29 @@ Some of these issues, such as incorrect North on some devices, may well be to do
 
 For this reason, the focus at present will be on developing a **pure three.js version only**. When we believe that the key bugs and issues have been resolved, the plan is to then provide an A-Frame wrapper.
 
+## Using the library
+
+The library will eventually be published to `npm`. For now, you should build a library tarball locally with
+```
+npm run build
+```
+
+Then you can use the library in your projects with:
+
+```javascript
+import * as LocAR from 'locar';
+```
+
+as long as you install the tarball locally into your projects, e.g. in your `package.json`:
+```
+"dependencies": {
+   "locar" : "file:location-of-the-tarball.tgz",
+   "three" : "^0.169.0"
+}
+```
+
+Including the library bundle directly as an import has issues with duplicate three.js imports which we have not resolved, so we recommend the approach above.
+
 ## Disclaimer
 
 This is an open-source project licensed under the [MIT License](LICENSE) and thus comes with no warranty. Also it is a volunteer-led project; work on the project by AR.js maintainers or any other contributor will be undertaken *time-permitting* only. For this reason we welcome contributors! The more people working on the project, the more likely it is that it will become full-featured and issues will be resolved.

@@ -7,6 +7,14 @@ export default defineConfig({
             entry: resolve(__dirname, 'lib/main.js'),
             name: 'locar',
             fileName: (format) => `locar.${format}.js`
+        },
+        rollupOptions: {
+            external: ['three'],
+            output: {
+                globals: {
+                    three: 'THREE'
+                }
+            }
         }
     }
 });
