@@ -7,8 +7,9 @@ const entries = { main: 'index.html' };
 });
 
 export default defineConfig({
+    base: '/locar.js',
     build: {
-		outDir: '../docs',
+        outDir: '../docs',
         rollupOptions: {
             input: entries 
         }
