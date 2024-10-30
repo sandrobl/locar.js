@@ -15,8 +15,10 @@ You need to have built LocAR itself first and produced a tarball; please see [th
 It is recommended to use [Vite](https://vitejs.dev) in **development** mode to test and experiment with them, and access them via the Vite dev server:
 
 ```
-http://localhost:5173
+http://localhost:5173/locar.js
 ```
+
+You need to add `locar.js` onto the URL as vite is configured to use that as the base.
 
 This also works nicely if you are using port forwarding with the Chrome Dev Tools on a real Android device.
 
