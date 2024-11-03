@@ -36,6 +36,9 @@ The examples are as follows:
     - West: blue (cyan)
     - East: green
 
+
 These boxes will always be close to your *initial* location, so if you move, the boxes will disappear. This example is a good test of whether your accelerometer and magnetometer are calibrated correctly. If they are, this example will work as expected. Unfortunately some Android devices seem to have them miscalibrated resulting in incorrect North (see [this issue](https://github.com/mrdoob/three.js/pull/22654)). We plan to investigate the extent of this problem and to see if it is consistent for certain devices (e.g. does a specific device model always have North wrong by 80 degrees anticlockwise?) 
+
+3. [AR Objects](03-ar-objects) : shows how you can add real AR objects with a given latitude and longitude and properties. Also shows how you can detect clicks on objects. Uses a hard-coded "fake" location and hard-coded objects, and you can rotate the three.js camera using the mouse, so will work on a desktop or laptop.
 
 **IMPORTANT!** Examples 2 onwards may fail with permissions problems on iOS. We are currently lacking developers with iOS devices and would very much welcome input from owners of iDevices !
