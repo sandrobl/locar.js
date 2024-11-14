@@ -60,7 +60,7 @@ renderer.setAnimationLoop(animate);
 function animate() {
     cam.update();
     deviceControls.update();
-    const objects = clickHandler.raycast(scene, camera);
+    const objects = clickHandler.raycast(camera, scene);
     if(objects.length) {
         alert(`This is ${objects[0].object.properties.name}`);
     }
