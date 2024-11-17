@@ -46,7 +46,7 @@ locar.on("gpsupdate", async(pos, distMoved) => {
                 );                
 
                 locar.add(mesh, poi.geometry.coordinates[0], poi.geometry.coordinates[1], 0, poi.properties);
-                indexedObjects[poi.osm_id] = mesh;
+                indexedObjects[poi.properties.osm_id] = mesh;
             }
         });
         firstPosition = false;
