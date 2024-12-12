@@ -45,6 +45,10 @@ as long as you install the tarball locally into your projects, e.g. in your `pac
 
 Including the library bundle directly as an import has issues with duplicate three.js imports which we have not resolved, so we recommend the approach above.
 
+## Tutorial
+
+Please see [here](https://github.com/AR-js-org/locar.js/blob/master/docs/tutorial/index.md) for a tutorial introducing LocAR.js.
+
 ## Disclaimer
 
 This is an open-source project licensed under the [MIT License](LICENSE) and thus comes with no warranty. Also it is a volunteer-led project; work on the project by AR.js maintainers or any other contributor will be undertaken *time-permitting* only. For this reason we welcome contributors! The more people working on the project, the more likely it is that it will become full-featured and issues will be resolved.
