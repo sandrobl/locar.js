@@ -24,9 +24,9 @@ For this reason, the focus at present will be on developing a **pure three.js ve
 
 ## Using the library
 
-The library will eventually be published to `npm`. For now, you should build a library tarball locally with
+The library has been published to `npm` so you can install with:
 ```
-npm run build
+npm install locar
 ```
 
 Then you can use the library in your projects with:
@@ -35,10 +35,10 @@ Then you can use the library in your projects with:
 import * as LocAR from 'locar';
 ```
 
-as long as you install the tarball locally into your projects, e.g. in your `package.json`:
+as long as you include `locar` as a dependency, e.g. in your `package.json`:
 ```
 "dependencies": {
-   "locar" : "file:location-of-the-tarball.tgz",
+   "locar" : "^0.0.3",
    "three" : "^0.169.0"
 }
 ```
