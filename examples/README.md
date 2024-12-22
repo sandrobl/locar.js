@@ -10,13 +10,15 @@ Live online versions of these examples are available [on GitHub Pages](https://a
 
 You might wish to modify and play around with the examples, by running them locally. 
 
-You need to have built LocAR itself first and produced a tarball; please see [the main README](https://github.com/AR-js-org/locar.js).
+LocAR.js is now available on NPM; the `package.json` here is configured to install it.
 
 It is recommended to use [Vite](https://vitejs.dev) in **development** mode to test and experiment with them, and access them via the Vite dev server:
 
 ```
 http://localhost:5173/locar.js
 ```
+
+The `package.json` contains scripts for running Vite in dev mode and building with Vite (`npm run dev` and `npm run build` respectively).
 
 You need to add `locar.js` onto the URL as vite is configured to use that as the base.
 
@@ -39,8 +41,6 @@ The examples are as follows:
 
 These boxes will always be close to your *initial* location, so if you move, the boxes will disappear. This example is a good test of whether your accelerometer and magnetometer are calibrated correctly. If they are, this example will work as expected. Unfortunately some Android devices seem to have them miscalibrated resulting in incorrect North (see [this issue](https://github.com/mrdoob/three.js/pull/22654)). We plan to investigate the extent of this problem and to see if it is consistent for certain devices (e.g. does a specific device model always have North wrong by 80 degrees anticlockwise?) 
 
-3. [AR Objects](03-ar-objects) : shows how you can add real AR objects with a given latitude and longitude and properties. Also shows how you can detect clicks on objects. Uses a hard-coded "fake" location and hard-coded objects, and you can rotate the three.js camera using the mouse, so will work on a desktop or laptop.
-
-4. [API Communication](04-api-communication): shows how you can communicate with a live GeoJSON API (OpenStreetMap-based). The GeoJSON is parsed, and AR objects created from each GeoJSON feature in the feed. Uses your current real GPS location and the device sensors, so **requires a real mobile device.** It also uses each object's OpenStreetMap ID to cache objects in memory as they are added, preventing the same object being added twice. Note that a new request to the server is performed if you move 100 metres; a better solution to minimise the number of server requests would be to implement a tiling system. This will hopefully appear soon! **Only works in Europe and Turkey due to the area of coverage of the underlying API**, but you can easily adapt the example to work with any GeoJSON API in other parts of the world simply by changing the URL.
+3. [API Communication](03-api-communication): shows how you can communicate with a live GeoJSON API (OpenStreetMap-based). The GeoJSON is parsed, and AR objects created from each GeoJSON feature in the feed. Uses your current real GPS location and the device sensors, so **requires a real mobile device.** It also uses each object's OpenStreetMap ID to cache objects in memory as they are added, preventing the same object being added twice. Note that a new request to the server is performed if you move 100 metres; a better solution to minimise the number of server requests would be to implement a tiling system. This will hopefully appear soon! **Only works in Europe and Turkey due to the area of coverage of the underlying API**, but you can easily adapt the example to work with any GeoJSON API in other parts of the world simply by changing the URL.
 
 **IMPORTANT!** Examples 2 onwards may fail with permissions problems on iOS. We are currently lacking developers with iOS devices and would very much welcome input from owners of iDevices !
