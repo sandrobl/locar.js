@@ -45,6 +45,10 @@ as long as you include `locar` as a dependency, e.g. in your `package.json`:
 
 Including the library bundle directly as an import has issues with duplicate three.js imports which we have not resolved, so we recommend the approach above.
 
+## API documentation
+
+Please see [here](https://ar-js-org.github.io/locar.js/api) for full API documentation.
+
 ## Tutorial
 
 Please see [here](https://github.com/AR-js-org/locar.js/blob/master/docs/tutorial/index.md) for a tutorial introducing LocAR.js.
