@@ -1,6 +1,6 @@
 {
   "name": "locar",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Location-based AR from AR.js.",
   "files": [
     "dist"
@@ -14,9 +14,11 @@
     }
   },
   "scripts": {
-    "build": "vite build && npm pack"
+    "build": "vite build && npm pack",
+    "makedocs": "jsdoc -r lib -d docs/api"
   },
   "devDependencies": {
+    "jsdoc": "^4.0.4",
     "vite": "^5.4.8"
   }
 }
