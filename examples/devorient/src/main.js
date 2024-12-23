@@ -1,4 +1,4 @@
 window.addEventListener("deviceorientationabsolute", e => {
     document.getElementById("devorient").innerHTML = 
-        `Alpha: ${e.alpha}<br />Beta: ${e.beta}<br />Gamma: ${e.gamma}`;
+        `Alpha: ${Math.floor(e.alpha)}<br />Beta: ${Math.floor(e.beta)}<br />Gamma: ${Math.floor(e.gamma)}`;
 });
