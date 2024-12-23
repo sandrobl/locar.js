@@ -22,6 +22,10 @@ Some of these issues, such as incorrect North on some devices, may well be to do
 
 For this reason, the focus at present will be on developing a **pure three.js version only**. When we believe that the key bugs and issues have been resolved, the plan is to then provide an A-Frame wrapper.
 
+## Cross-platform Compatibility
+
+Chrome on Android is recommended. It may also work on Chrome in iOS; please file an issue if not. It will not work on Safari on iOS, due to permissions issues - **though pull requests are welcome to fix this**. Firefox unfortunately does not appear to fully implement the Device Orientation API so is unlikely to work
+
 ## Using the library
 
 The library has been published to `npm` so you can install with:
