@@ -28,7 +28,7 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>LocationBased<span class="signature">(scene, camera, options)</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>LocationBased<span class="signature">(scene, camera, options, serverLogger)</span><span class="type-signature"></span></h2>
         
             <div class="class-description">The main class for the LocAR.js system.</div>
         
@@ -45,7 +45,7 @@
     
 
     
-    <h4 class="name" id="LocationBased"><span class="type-signature"></span>new LocationBased<span class="signature">(scene, camera, options)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="LocationBased"><span class="type-signature"></span>new LocationBased<span class="signature">(scene, camera, options, serverLogger)</span><span class="type-signature"></span></h4>
     
 
     
@@ -75,6 +75,8 @@
         
 
         
+        <th>Default</th>
+        
 
         <th class="last">Description</th>
     </tr>
@@ -100,6 +102,10 @@
             
 
             
+                <td class="default">
+                
+                </td>
+            
 
             <td class="description last">The Three.js scene to use.</td>
         </tr>
@@ -122,6 +128,10 @@
 
             
 
+            
+                <td class="default">
+                
+                </td>
             
 
             <td class="description last">The Three.js camera to use. Should usually 
@@ -147,8 +157,41 @@ be a THREE.PerspectiveCamera.</td>
             
 
             
+                <td class="default">
+                
+                </td>
+            
 
-            <td class="description last">Initialisation options for the GPS; see
+            <td class="description last">Initialisation options for the GPS; see</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>serverLogger</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    null
+                
+                </td>
+            
+
+            <td class="description last">an object which can optionally log GPS position to a server for debugging. null by default, so no logging will be done. This object should implement a sendData() method to send data (2nd arg) to a given endpoint (1st arg). Please see source code for details. Ensure you comply with privacy laws (GDPR or equivalent) if implementing this.
 setGpsOptions() below.</td>
         </tr>
 
@@ -441,7 +484,7 @@ the contents of the GeoJSON properties field).</td>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="location-based.js.html">location-based.js</a>, <a href="location-based.js.html#line161">line 161</a>
+        <a href="location-based.js.html">location-based.js</a>, <a href="location-based.js.html#line174">line 174</a>
     </li></ul></dd>
     
 
@@ -671,7 +714,7 @@ ignored if lower than the specified minimum accuracy.</td>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="location-based.js.html">location-based.js</a>, <a href="location-based.js.html#line116">line 116</a>
+        <a href="location-based.js.html">location-based.js</a>, <a href="location-based.js.html#line129">line 129</a>
     </li></ul></dd>
     
 
@@ -835,7 +878,7 @@ rotation).
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="location-based.js.html">location-based.js</a>, <a href="location-based.js.html#line140">line 140</a>
+        <a href="location-based.js.html">location-based.js</a>, <a href="location-based.js.html#line153">line 153</a>
     </li></ul></dd>
     
 
@@ -1023,7 +1066,7 @@ standard Geolocation API numerical error code.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="location-based.js.html">location-based.js</a>, <a href="location-based.js.html#line196">line 196</a>
+        <a href="location-based.js.html">location-based.js</a>, <a href="location-based.js.html#line216">line 216</a>
     </li></ul></dd>
     
 
@@ -1167,7 +1210,7 @@ standard Geolocation API numerical error code.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="location-based.js.html">location-based.js</a>, <a href="location-based.js.html#line179">line 179</a>
+        <a href="location-based.js.html">location-based.js</a>, <a href="location-based.js.html#line199">line 199</a>
     </li></ul></dd>
     
 
@@ -1307,7 +1350,7 @@ minimum accuracy, in metres, for a GPS reading to be counted.</td>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="location-based.js.html">location-based.js</a>, <a href="location-based.js.html#line52">line 52</a>
+        <a href="location-based.js.html">location-based.js</a>, <a href="location-based.js.html#line59">line 59</a>
     </li></ul></dd>
     
 
@@ -1446,7 +1489,7 @@ containing easting and northing.</td>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="location-based.js.html">location-based.js</a>, <a href="location-based.js.html#line41">line 41</a>
+        <a href="location-based.js.html">location-based.js</a>, <a href="location-based.js.html#line48">line 48</a>
     </li></ul></dd>
     
 
@@ -1482,7 +1525,7 @@ containing easting and northing.</td>
     
 
     
-    <h4 class="name" id="startGps"><span class="type-signature"></span>startGps<span class="signature">()</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+    <h4 class="name" id="startGps"><span class="type-signature">(async) </span>startGps<span class="signature">()</span><span class="type-signature"> &rarr; {boolean}</span></h4>
     
 
     
@@ -1534,7 +1577,7 @@ containing easting and northing.</td>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="location-based.js.html">location-based.js</a>, <a href="location-based.js.html#line66">line 66</a>
+        <a href="location-based.js.html">location-based.js</a>, <a href="location-based.js.html#line73">line 73</a>
     </li></ul></dd>
     
 
@@ -1645,7 +1688,7 @@ GPS errors can be handled by handling the gpserror event.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="location-based.js.html">location-based.js</a>, <a href="location-based.js.html#line98">line 98</a>
+        <a href="location-based.js.html">location-based.js</a>, <a href="location-based.js.html#line111">line 111</a>
     </li></ul></dd>
     
 
@@ -1813,7 +1856,7 @@ stopped (i.e. it was never started).
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="location-based.js.html">location-based.js</a>, <a href="location-based.js.html#line74">line 74</a>
+        <a href="location-based.js.html">location-based.js</a>, <a href="location-based.js.html#line87">line 87</a>
     </li></ul></dd>
     
 
@@ -1979,7 +2022,7 @@ last GPS update.</td>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="location-based.js.html">location-based.js</a>, <a href="location-based.js.html#line233">line 233</a>
+        <a href="location-based.js.html">location-based.js</a>, <a href="location-based.js.html#line275">line 275</a>
     </li></ul></dd>
     
 
@@ -2032,7 +2075,7 @@ last GPS update.</td>
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sun Dec 22 2024 15:45:07 GMT+0100 (Central European Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sun Jan 26 2025 18:09:46 GMT+0000 (Greenwich Mean Time)
 </footer>
 
 <script> prettyPrint(); </script>
