@@ -150,24 +150,24 @@ locar.on("gpsupdate", (pos, distMoved) => {
     if(firstLocation) {
 
         const boxProps = [{
-            latDis: 0.001,
+            latDis: 0.0005,
             lonDis: 0,
             colour: 0xff0000
         }, {
-            latDis: -0.001,
+            latDis: -0.0005,
             lonDis: 0,
             colour: 0xffff00
         }, {
             latDis: 0,
-            lonDis: -0.001,
+            lonDis: -0.0005,
             colour: 0x00ffff
         }, {
             latDis: 0,
-            lonDis: 0.001,
+            lonDis: 0.0005,
             colour: 0x00ff00
         }];
 
-        const geom = new THREE.BoxGeometry(20,20,20);
+        const geom = new THREE.BoxGeometry(10,10,10);
 
         for(const boxProp of boxProps) {
             const mesh = new THREE.Mesh(
@@ -196,6 +196,6 @@ function animate() {
     renderer.render(scene, camera);
 }
 ```
-Note how it works: when we get a location, we check whether this was the first GPS location obtained (to prevent the same boxes being added each time our GPS location changes). If it was, we add four boxes a short distance to the north (red), south (yellow), west (cyan) and east (green) of us. 
+Note how it works: when we get a location, we check whether this was the first GPS location obtained (to prevent the same boxes being added each time our GPS location changes). If it was, we add four boxes a short distance to the north (red), south (yellow), west (cyan) and east (green) of us. These are around 50 metres from our original position.
 
-Try it out, and if your sensors are calibrated correctly, you will see a red box to your north, a yellow box to your south, a cyan (light blue) box to your west and a green box to your east. These are relative to your *initial* position so as you move, the boxes' positions relative to you will change.
+Try it out, and if your sensors are calibrated correctly, you will see a red box to your north, a yellow box to your south, a cyan (light blue) box to your west and a green box to your east. These are relative to your *initial* position so as you move, the boxes' positions relative to you will change. Remember the boxes are around 50 metres from your original position, so you will have to move some distance (maybe around 10 metres) to see a difference.
