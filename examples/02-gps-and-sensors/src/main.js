@@ -28,24 +28,24 @@ locar.on("gpsupdate", (pos, distMoved) => {
         alert(`Got the initial location: longitude ${pos.coords.longitude}, latitude ${pos.coords.latitude}`);
 
         const boxProps = [{
-            latDis: 0.001,
+            latDis: 0.0005,
             lonDis: 0,
             colour: 0xff0000
         }, {
-            latDis: -0.001,
+            latDis: -0.0005,
             lonDis: 0,
             colour: 0xffff00
         }, {
             latDis: 0,
-            lonDis: -0.001,
+            lonDis: -0.0005,
             colour: 0x00ffff
         }, {
             latDis: 0,
-            lonDis: 0.001,
+            lonDis: 0.0005,
             colour: 0x00ff00
         }];
 
-        const geom = new THREE.BoxGeometry(20,20,20);
+        const geom = new THREE.BoxGeometry(10,10,10);
 
         for(const boxProp of boxProps) {
             const mesh = new THREE.Mesh(
