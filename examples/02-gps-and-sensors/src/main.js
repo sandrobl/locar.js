@@ -53,7 +53,7 @@ locar.on("gpsupdate", (pos, distMoved) => {
                 new THREE.MeshBasicMaterial({color: boxProp.colour})
             );
         
-            console.log(`adding at ${pos.coords.longitude + boxProp.lonDis},${pos.coords.latitude + boxProp.latDis}`);    
+            console.log(`adding at ${pos.coords.longitude+boxProp.lonDis},${pos.coords.latitude+boxProp.latDis}`);    
             locar.add(
                 mesh, 
                 pos.coords.longitude + boxProp.lonDis, 
@@ -66,6 +66,15 @@ locar.on("gpsupdate", (pos, distMoved) => {
 });
 
 locar.startGps();
+
+document.getElementById("setFakeLoc").addEventListener("click", e => {
+    alert("Using fake input GPS, not real GPS location");
+    locar.stopGps();
+    locar.fakeGps(
+        parseFloat(document.getElementById("fakeLon").value),
+        parseFloat(document.getElementById("fakeLat").value)
+    );
+});
 
 renderer.setAnimationLoop(animate);
 
