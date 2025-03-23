@@ -3,14 +3,27 @@
 <head>
 <title>three.js</title>
 <style>
-html, body { width: 100%; height: 100% }
+
+#gpsinput {
+	background-color: blue;
+	height: 300px;
+	width: 100%;
+	z-index: 999;
+    position: relative;
+    font-size: 200%;
+}
+
+#gpsinput input, #gpsinput button {
+	font-size: 200%;
+	margin: 10px;
+}
 </style>
   <script type="module" crossorigin src="/locar.js/assets/02-gps-and-sensors-Cd_hntzH.js"></script>
   <link rel="modulepreload" crossorigin href="/locar.js/assets/modulepreload-polyfill-B5Qt9EMX.js">
   <link rel="modulepreload" crossorigin href="/locar.js/assets/locar.es-BJfuP3Gk.js">
 </head>
 <body>
-<div id="gpsinput" style="position:relative; top: calc(100% - 120px); width: 400px; background-color: blue; color: white; z-index: 999; padding: 10px">
+<div id="gpsinput">
 <input id="fakeLat" placeholder="Fake Lat" /><br />
 <input id="fakeLon" placeholder="Fake Lon"/><br />
 <button id="setFakeLoc">Set Fake Location!</button>
