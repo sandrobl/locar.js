@@ -5,28 +5,38 @@
 <style>
 
 #gpsinput {
-	background-color: blue;
-	height: 300px;
+	display: flex;
+	height: 100%;
 	width: 100%;
-	z-index: 999;
-    position: relative;
+	z-index: 1;
+    position: fixed;
+    top: 0px;
     font-size: 200%;
+	justify-content: end; 
+	flex-direction: column;
+}
+
+#gpsinput > div {
+    background-color: #c0c0c0; 
+	display: flex;
+	justify-content: center
 }
 
 #gpsinput input, #gpsinput button {
 	font-size: 200%;
 	margin: 10px;
 }
+
 </style>
-  <script type="module" crossorigin src="/locar.js/assets/02-gps-and-sensors-Cd_hntzH.js"></script>
+  <script type="module" crossorigin src="/locar.js/assets/02-gps-and-sensors-Hph3CX7u.js"></script>
   <link rel="modulepreload" crossorigin href="/locar.js/assets/modulepreload-polyfill-B5Qt9EMX.js">
   <link rel="modulepreload" crossorigin href="/locar.js/assets/locar.es-BJfuP3Gk.js">
 </head>
 <body>
 <div id="gpsinput">
-<input id="fakeLat" placeholder="Fake Lat" /><br />
-<input id="fakeLon" placeholder="Fake Lon"/><br />
-<button id="setFakeLoc">Set Fake Location!</button>
+<div><input id="fakeLat" placeholder="Fake Lat" /></div>
+<div><input id="fakeLon" placeholder="Fake Lon"/></div>
+<div><button id="setFakeLoc">Set Fake Location!</button></div>
 </div>
 </body>
 </html>
