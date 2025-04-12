@@ -5,18 +5,25 @@ const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(60, window.innerWidth/window.innerHeight, 0.001, 100);
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setPixelRatio(window.devicePixelRatio);
 document.body.appendChild(renderer.domElement);
 
+
 window.addEventListener("resize", e => {
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    camera.aspect = window.innerWidth / window.innerHeight;    
+    camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
 });
 const box = new THREE.BoxGeometry(2,2,2);
 const cube = new THREE.Mesh(box, new THREE.MeshBasicMaterial({ color: 0xff0000 }));
-
 const locar = new LocAR.LocationBased(scene, camera);
-const cam = new LocAR.WebcamRenderer(renderer);
+const cam = new LocAR.Webcam( { 
+    width: 1024, 
+    height: 768,
+    onVideoStarted: texture => {
+        scene.background = texture;        
+    }
+}, null);
 
 
 locar.fakeGps(-0.72, 51.05);
@@ -26,6 +33,5 @@ renderer.setAnimationLoop(animate);
 
 
 function animate() {
-    cam.update();
     renderer.render(scene, camera);
 }

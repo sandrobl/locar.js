@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "three": "^0.169.0",
-    "locar": "^0.0.8"
+    "locar": "file:../locar-0.0.8-webcam-2.tgz"
   },
   "devDependencies": {
     "vite": "^5.4.8"

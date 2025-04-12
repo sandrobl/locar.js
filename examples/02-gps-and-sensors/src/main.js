@@ -17,7 +17,13 @@ window.addEventListener("resize", e => {
     camera.updateProjectionMatrix();
 });
 
-const cam = new LocAR.WebcamRenderer(renderer);
+const cam = new LocAR.Webcam( { 
+    width: 1024, 
+    height: 768,
+    onVideoStarted: texture => {
+        scene.background = texture;        
+    }
+}, null);
 
 let firstLocation = true;
 
@@ -79,7 +85,6 @@ document.getElementById("setFakeLoc").addEventListener("click", e => {
 renderer.setAnimationLoop(animate);
 
 function animate() {
-    cam.update();
     deviceOrientationControls?.update();
     renderer.render(scene, camera);
 }
