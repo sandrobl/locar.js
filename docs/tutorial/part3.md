@@ -27,8 +27,13 @@ const locar = new LocAR.LocationBased(scene, camera);
 
 const deviceControls = new LocAR.DeviceOrientationControls(camera);
 
-const cam = new LocAR.WebcamRenderer(renderer);
-
+const cam = new LocAR.Webcam({
+    width: 1024,
+    height: 768,
+    onVideoStarted: texture => {
+        scene.background = texture;
+    }
+});
 
 let firstPosition = true;
 
@@ -69,7 +74,6 @@ locar.startGps();
 renderer.setAnimationLoop(animate);
 
 function animate() {
-    cam.update();
     deviceControls.update();
     renderer.render(scene, camera);
 }

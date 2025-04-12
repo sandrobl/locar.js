@@ -29,7 +29,13 @@ const box = new THREE.BoxGeometry(2,2,2);
 const cube = new THREE.Mesh(box, new THREE.MeshBasicMaterial({ color: 0xff0000 }));
 
 const locar = new LocAR.LocationBased(scene, camera);
-const cam = new LocAR.WebcamRenderer(renderer);
+const cam = new LocAR.Webcam({
+    width: 1024,
+    height: 768,
+    onVideoStarted: texture => {
+        scene.background = texture;
+    }
+});
 
 
 locar.startGps();
@@ -39,7 +45,6 @@ renderer.setAnimationLoop(animate);
 
 
 function animate() {
-    cam.update();
     renderer.render(scene, camera);
 }
 ```
@@ -77,7 +82,13 @@ const box = new THREE.BoxGeometry(2,2,2);
 const cube = new THREE.Mesh(box, new THREE.MeshBasicMaterial({ color: 0xff0000 }));
 
 const locar = new LocAR.LocationBased(scene, camera);
-const cam = new LocAR.WebcamRenderer(renderer);
+const cam = new LocAR.Webcam({
+    width: 1024,
+    height: 768,
+    onVideoStarted: texture => {
+        scene.background = texture;
+    }
+});
 
 // Create the device orientation tracker
 const deviceOrientationControls = new LocAR.DeviceOrientationControls(camera);
@@ -92,7 +103,6 @@ function animate() {
     // Update the scene using the latest sensor readings
     deviceOrientationControls.update();
 
-    cam.update();
     renderer.render(scene, camera);
 }
 ```
@@ -140,7 +150,13 @@ window.addEventListener("resize", e => {
     camera.updateProjectionMatrix();
 });
 
-const cam = new LocAR.WebcamRenderer(renderer);
+const cam = new LocAR.Webcam({
+    width: 1024,
+    height: 768,
+    onVideoStarted: texture => {
+        scene.background = texture;
+    }
+});
 
 let firstLocation = true;
 
@@ -191,7 +207,6 @@ locar.startGps();
 renderer.setAnimationLoop(animate);
 
 function animate() {
-    cam.update();
     deviceOrientationControls.update();
     renderer.render(scene, camera);
 }

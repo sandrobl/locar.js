@@ -40,8 +40,13 @@ const box = new THREE.BoxGeometry(2,2,2);
 const cube = new THREE.Mesh(box, new THREE.MeshBasicMaterial({ color: 0xff0000 }));
 
 const locar = new LocAR.LocationBased(scene, camera);
-const cam = new LocAR.WebcamRenderer(renderer);
-
+const cam = new LocAR.Webcam({
+    width: 1024,
+    height: 768,
+    onVideoStarted: texture => {
+        scene.background = texture;
+    }
+});
 
 locar.fakeGps(-0.72, 51.05);
 locar.add(cube, -0.72, 51.0501);
@@ -50,7 +55,6 @@ renderer.setAnimationLoop(animate);
 
 
 function animate() {
-    cam.update();
     renderer.render(scene, camera);
 }
 
@@ -64,15 +68,27 @@ What comes next though is new, and specific to AR.js:
 
 ```javascript
 const locar = new LocAR.LocationBased(scene, camera);
-const cam = new LocAR.WebcamRenderer(renderer);
+const cam = new LocAR.Webcam({
+    width: 1024,
+    height: 768,
+    onVideoStarted: texture => {
+        scene.background = texture;
+    }
+});
 ```
 
-We use two new objects, both part of the LocAR.js API. Firstly `LocAR.LocationBased` is the overall AR.js "manager" object and secondly `LocAR.WebcamRenderer` is responsible for rendering the live camera feed. We need to supply our scene and camera as arguments to `LocAR.LocationBased` and our renderer as an argument to `LocAR.WebcamRenderer`.
+We use two new objects, both part of the LocAR.js API. Firstly `LocAR.LocationBased` is the overall AR.js "manager" object and secondly `LocAR.Webcam` is responsible for initialising the webcam. We need to supply our scene and camera as arguments to `LocAR.LocationBased` and an object of options as an argument to `LocAR.Webcam`. Of these options you can specify a preferred width and height for the webcam feed but you **must** supply an `onVideoStarted` callback. This runs as soon as the webcam feed is initialised. It receives a `THREE.VideoTexture` as a parameter which is used to set the background of the scene to the webcam feed.
 
-The `LocAR.WebcamRenderer` will, internally, create a `video` element to capture the webcam. Alternatively, if you have a `video` element already set up in your HTML, you can pass its CSS selector into the `WebcamRenderer` as an optional argument. For example:
+The `LocAR.Webcam` will, internally, create a `video` element to capture the webcam. Alternatively, if you have a `video` element already set up in your HTML, you can pass its CSS selector into the `Webcam` as an optional argument. For example:
 
 ```javascript
-const cam = new LocAR.WebcamRenderer(renderer, '#video1');
+const cam = new LocAR.Webcam({
+    width: 1024,
+    height: 768,
+    onVideoStarted: texture => {
+        scene.background = texture;
+    }
+}, '#video1');
 ```
 
 Next we add our box mesh to LocAR. This next line is interesting: 
@@ -91,13 +107,7 @@ arjs.fakeGps(-0.72, 51.05);
 
 This places us just to the south of the red box. By default, we face north, so the red box will appear in front of us.
 
-The remaining code is the standard three.js code for defining a rendering function and setting it as the animation loop. However note this code within the rendering function:
-
-```javascript
-cam.update();
-```
-
-This API call will render the latest camera frame.
+The remaining code is the standard three.js code for defining a rendering function and setting it as the animation loop.
 
 ### Try it!
 
