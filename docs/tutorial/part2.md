@@ -30,8 +30,8 @@ const cube = new THREE.Mesh(box, new THREE.MeshBasicMaterial({ color: 0xff0000 }
 
 const locar = new LocAR.LocationBased(scene, camera);
 const cam = new LocAR.Webcam({
-    width: 1024,
-    height: 768,
+    idealWidth: 1024,
+    idealHeight: 768,
     onVideoStarted: texture => {
         scene.background = texture;
     }
@@ -83,8 +83,8 @@ const cube = new THREE.Mesh(box, new THREE.MeshBasicMaterial({ color: 0xff0000 }
 
 const locar = new LocAR.LocationBased(scene, camera);
 const cam = new LocAR.Webcam({
-    width: 1024,
-    height: 768,
+    idealWidth: 1024,
+    idealHeight: 768,
     onVideoStarted: texture => {
         scene.background = texture;
     }
@@ -151,8 +151,8 @@ window.addEventListener("resize", e => {
 });
 
 const cam = new LocAR.Webcam({
-    width: 1024,
-    height: 768,
+    idealWidth: 1024,
+    idealHeight: 768,
     onVideoStarted: texture => {
         scene.background = texture;
     }

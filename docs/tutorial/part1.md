@@ -41,8 +41,8 @@ const cube = new THREE.Mesh(box, new THREE.MeshBasicMaterial({ color: 0xff0000 }
 
 const locar = new LocAR.LocationBased(scene, camera);
 const cam = new LocAR.Webcam({
-    width: 1024,
-    height: 768,
+    idealWidth: 1024,
+    idealHeight: 768,
     onVideoStarted: texture => {
         scene.background = texture;
     }
@@ -69,22 +69,22 @@ What comes next though is new, and specific to AR.js:
 ```javascript
 const locar = new LocAR.LocationBased(scene, camera);
 const cam = new LocAR.Webcam({
-    width: 1024,
-    height: 768,
+    idealWidth: 1024,
+    idealHeight: 768,
     onVideoStarted: texture => {
         scene.background = texture;
     }
 });
 ```
 
-We use two new objects, both part of the LocAR.js API. Firstly `LocAR.LocationBased` is the overall AR.js "manager" object and secondly `LocAR.Webcam` is responsible for initialising the webcam. We need to supply our scene and camera as arguments to `LocAR.LocationBased` and an object of options as an argument to `LocAR.Webcam`. Of these options you can specify a preferred width and height for the webcam feed but you **must** supply an `onVideoStarted` callback. This runs as soon as the webcam feed is initialised. It receives a `THREE.VideoTexture` as a parameter which is used to set the background of the scene to the webcam feed.
+We use two new objects, both part of the LocAR.js API. Firstly `LocAR.LocationBased` is the overall AR.js "manager" object and secondly `LocAR.Webcam` is responsible for initialising the webcam. We need to supply our scene and camera as arguments to `LocAR.LocationBased` and an object of options as an argument to `LocAR.Webcam`. Of these options you can specify an ideal width and height for the webcam feed but you **must** supply an `onVideoStarted` callback. This runs as soon as the webcam feed is initialised. It receives a `THREE.VideoTexture` as a parameter which is used to set the background of the scene to the webcam feed.
 
 The `LocAR.Webcam` will, internally, create a `video` element to capture the webcam. Alternatively, if you have a `video` element already set up in your HTML, you can pass its CSS selector into the `Webcam` as an optional argument. For example:
 
 ```javascript
 const cam = new LocAR.Webcam({
-    width: 1024,
-    height: 768,
+    idealWidth: 1024,
+    idealHeight: 768,
     onVideoStarted: texture => {
         scene.background = texture;
     }

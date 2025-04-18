@@ -6,8 +6,15 @@ export default defineConfig({
         lib: {
             entry: resolve(__dirname, 'lib/main.js'),
             name: 'locar',
+            fileName: format => `locar.${format}.js`
+        },
+		/*
+        aframe: {
+            entry: resolve(__dirname, 'lib/aframe/main.js'),
+            name: 'locar-aframe',
             fileName: (format) => `locar.${format}.js`
         },
+		*/
         rollupOptions: {
             external: ['three'],
             output: {
@@ -16,5 +23,6 @@ export default defineConfig({
                 }
             }
         }
+//		minify: 'none'
     }
 });

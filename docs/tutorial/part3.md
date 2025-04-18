@@ -28,8 +28,8 @@ const locar = new LocAR.LocationBased(scene, camera);
 const deviceControls = new LocAR.DeviceOrientationControls(camera);
 
 const cam = new LocAR.Webcam({
-    width: 1024,
-    height: 768,
+    idealWidth: 1024,
+    idealHeight: 768,
     onVideoStarted: texture => {
         scene.background = texture;
     }

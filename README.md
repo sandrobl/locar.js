@@ -4,7 +4,7 @@ Location-based AR from AR.js.
 
 ## What is this?
 
-LocAR.js is an AR.js project to develop a library focused specifically on location-based augmented reality in the browser. Currently it consists of the location-based three.js code from [the main AR.js repository](https://github.com/AR-js-org/AR.js), with some minor changes to make it compatible with latest versions (0.169.0 at time of writing) of three.js.
+LocAR.js is an AR.js project to develop a library focused specifically on location-based augmented reality in the browser. Currently it consists of the location-based three.js code from [the main AR.js repository](https://github.com/AR-js-org/AR.js), with some minor changes to make it compatible with latest versions (0.175.0 at time of writing) of three.js.
 
 ## Why?
 
@@ -19,8 +19,6 @@ The opportunity has also been taken to move to the modern and user-friendly buil
 For a while there have been some bugs and issues with location-based AR.js which are thus far unresolved (e.g [#278](https://github.com/AR-js-org/AR.js/issues/278) or [#590](https://github.com/AR-js-org/AR.js/issues/590) ), which we hope can be investigated more easily with a standalone project (subject to our time availability of course - which is why we need developers and maintainers!). It's also hoped that the move to the more friendly Vite build system will help resolve some of the occasional issues that occur with importing ES6 modules (e.g. [issue 607](https://github.com/AR-js-org/AR.js/issues/607) ).
 
 Some of these issues, such as incorrect North on some devices, may well be to do with incorrect or mis-calibrated sensors but the hope is that the standalone library will help to verify this and, if certain devices have North wrong by a consistent bearing, to develop a calibration tool.
-
-For this reason, the focus at present will be on developing a **pure three.js version only**. When we believe that the key bugs and issues have been resolved, the plan is to then provide an A-Frame wrapper.
 
 ## Cross-platform Compatibility
 
@@ -42,8 +40,8 @@ import * as LocAR from 'locar';
 as long as you include `locar` as a dependency, e.g. in your `package.json`:
 ```
 "dependencies": {
-   "locar" : "^0.0.9",
-   "three" : "^0.169.0"
+   "locar" : "^0.0.10",
+   "three" : "^0.175.0"
 }
 ```
 
