@@ -1,4 +1,3 @@
-import 'aframe'; // necessary for now due to the way the library is built - will fix
 import * as THREE from 'three';
 import * as LocAR from 'locar';
 

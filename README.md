@@ -40,7 +40,7 @@ import * as LocAR from 'locar';
 as long as you include `locar` as a dependency, e.g. in your `package.json`:
 ```
 "dependencies": {
-   "locar" : "^0.0.10",
+   "locar" : "^0.0.11",
    "three" : "^0.175.0"
 }
 ```

@@ -1,2 +1,2 @@
 import 'aframe';
-import * as LocAR from 'locar';
+import 'locar-aframe';
