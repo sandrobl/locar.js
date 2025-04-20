@@ -2,12 +2,11 @@ import * as THREE from 'three';
 import * as LocAR from 'locar';
 
 const camera = new THREE.PerspectiveCamera(80, window.innerWidth/window.innerHeight, 0.001, 1000);
-const renderer = new THREE.WebGLRenderer();
+const renderer = new THREE.WebGLRenderer({
+    canvas: document.getElementById("glscene")
+});
 renderer.setSize(window.innerWidth, window.innerHeight);
 const scene = new THREE.Scene();
-
-
-document.body.appendChild(renderer.domElement);
 
 
 window.addEventListener("resize", e => {
