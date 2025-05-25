@@ -1,5 +1,7 @@
 # Updates
 
+- `0.0.12` (2025-05-25) - `DeviceOrientationControls` now takes `options` object which allows the specification of the `smoothingFactor`, like original AR.js.
+
 - `0.0.11` (2025-04-19) - separated out A-Frame API into own package `locar-aframe` for greater modularity.
  
 - `0.0.10` (2025-04-18) - added A-Frame components: `locar-webcam`, `locar-camera` and `locar-entity-place`, with the latter two more or less equivalent to the original AR.js `gps-new-camera` and `gps-new-entity-place` components but with some parameter changes.
