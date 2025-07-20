@@ -73,7 +73,8 @@ locar.on("gpsupdate", (pos, distMoved) => {
     }
 });
 
-locar.startGps();
+//locar.startGps();
+locar.fakeGps(36.29, 59.64);
 
 document.getElementById("setFakeLoc").addEventListener("click", e => {
     alert("Using fake input GPS, not real GPS location");

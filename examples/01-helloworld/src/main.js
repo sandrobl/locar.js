@@ -25,7 +25,7 @@ const cam = new LocAR.Webcam( {
     }
 }, null);
 
-
+const devOrCont = new LocAR.DeviceOrientationControls(camera);
 locar.fakeGps(-0.72, 51.05);
 locar.add(cube, -0.72, 51.0501);
 
@@ -33,5 +33,6 @@ renderer.setAnimationLoop(animate);
 
 
 function animate() {
+	devOrCont?.update();
     renderer.render(scene, camera);
 }
