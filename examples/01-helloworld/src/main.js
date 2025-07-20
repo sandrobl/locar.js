@@ -19,11 +19,16 @@ const cube = new THREE.Mesh(box, new THREE.MeshBasicMaterial({ color: 0xff0000 }
 const locar = new LocAR.LocationBased(scene, camera);
 const cam = new LocAR.Webcam( { 
     idealWidth: 1024, 
-    idealHeight: 768,
-    onVideoStarted: texture => {
-        scene.background = texture;        
-    }
+    idealHeight: 768
 }, null);
+
+cam.on("webcamstarted", texture => {
+    scene.background = texture;
+});
+
+cam.on("webcamerror", (name, msg) => {
+	alert(`Webcam error: name ${name} msg ${msg}`);
+});
 
 const devOrCont = new LocAR.DeviceOrientationControls(camera);
 locar.fakeGps(-0.72, 51.05);

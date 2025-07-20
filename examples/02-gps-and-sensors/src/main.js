@@ -21,11 +21,16 @@ window.addEventListener("resize", e => {
 
 const cam = new LocAR.Webcam( { 
     idealWidth: 1024, 
-    idealHeight: 768,
-    onVideoStarted: texture => {
-        scene.background = texture;        
-    }
+    idealHeight: 768
 }, null);
+
+cam.on("webcamstarted", texture => {
+    scene.background = texture;
+});
+
+cam.on("webcamerror", (name, msg) => {
+	alert(`Webcam error: name ${name} msg ${msg}`);
+});
 
 let firstLocation = true;
 
