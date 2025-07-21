@@ -21,11 +21,16 @@ window.addEventListener("resize", e => {
 
 const cam = new LocAR.Webcam( { 
     idealWidth: 1024, 
-    idealHeight: 768,
-    onVideoStarted: texture => {
-        scene.background = texture;        
-    }
+    idealHeight: 768
 }, null);
+
+cam.on("webcamstarted", texture => {
+    scene.background = texture;
+});
+
+cam.on("webcamerror", (name, msg) => {
+	alert(`Webcam error: name ${name} msg ${msg}`);
+});
 
 let firstLocation = true;
 
@@ -73,7 +78,8 @@ locar.on("gpsupdate", (pos, distMoved) => {
     }
 });
 
-locar.startGps();
+//locar.startGps();
+locar.fakeGps(36.29, 59.64);
 
 document.getElementById("setFakeLoc").addEventListener("click", e => {
     alert("Using fake input GPS, not real GPS location");
