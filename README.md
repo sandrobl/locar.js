@@ -2,6 +2,8 @@
 
 Location-based AR from AR.js.
 
+**This is the `PR16` branch of LocAR.js, incorporating the improved event-handling system in issue #10 and pull request #16. It is currently untested on iOS devices. This distribution is not available on `npm`; you have to build it yourself (version `0.0.13-pre3`; use the tarball). If you want to work with A-Frame you also need to build the matching [locar-aframe.js](https://github.com/AR-js-org/locar-aframe.js) distribution, again the `PR16` branch, version `0.0.4-pre1` and maybe modify the path to `locar-aframe.js` in the examples `package.json`.**
+
 ## What is this?
 
 LocAR.js is an AR.js project to develop a library focused specifically on location-based augmented reality in the browser. Currently it consists of the location-based three.js code from [the main AR.js repository](https://github.com/AR-js-org/AR.js), with some minor changes to make it compatible with latest versions (0.175.0 at time of writing) of three.js.
