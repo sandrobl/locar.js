@@ -3,7 +3,7 @@
     "aframe": "^1.7.1",
     "aframe-look-at-component": "^1.0.0",
     "locar": "file:../locar-0.0.13-pre3.tgz",
-    "locar-aframe": "0.0.3"
+    "locar-aframe": "file:../../locar-aframe.js/locar-aframe-0.0.4-pre1.tgz"
   },
   "devDependencies": {
     "vite": "^5.4.8"
