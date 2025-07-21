@@ -18,18 +18,27 @@ window.addEventListener("resize", e => {
 const locar = new LocAR.LocationBased(scene, camera);
 
 const deviceControls = new LocAR.DeviceOrientationControls(camera);
+deviceControls.on("deviceorientationgranted", ev => {
+    ev.target.connect();
+});
 
-const cam = new LocAR.Webcam( { 
+deviceControls.on("deviceorientationerror", error => {
+    alert(`Device orientation error: code ${error.code} message ${error.message}`);
+});
+
+deviceControls.init();
+
+const cam = new LocAR.Webcam({ 
     idealWidth: 1024, 
     idealHeight: 768
 });
 
-cam.on("webcamstarted", texture => {
-    scene.background = texture;
+cam.on("webcamstarted", ev => {
+    scene.background = ev.texture;
 });
 
-cam.on("webcamerror", (name, msg) => {
-	alert(`Webcam error: name ${name} msg ${msg}`);
+cam.on("webcamerror", error => {
+	alert(`Webcam error: code ${error.code} message ${error.message}`);
 });
 
 let firstPosition = true;
@@ -40,11 +49,15 @@ const cube = new THREE.BoxGeometry(20, 20, 20);
 
 const clickHandler = new LocAR.ClickHandler(renderer);
 
-locar.on("gpsupdate", async(pos, distMoved) => {
-    
-    if(firstPosition || distMoved > 100) {
+locar.on("gpserror", error => {
+    alert(`GPS error: code ${error.code}`);
+});
 
-        const response = await fetch(`https://hikar.org/webapp/map?bbox=${pos.coords.longitude-0.02},${pos.coords.latitude-0.02},${pos.coords.longitude+0.02},${pos.coords.latitude+0.02}&layers=poi&outProj=4326`);
+locar.on("gpsupdate", async(ev) => {
+    
+    if(firstPosition || ev.distMoved > 100) {
+
+        const response = await fetch(`https://hikar.org/webapp/map?bbox=${ev.position.coords.longitude-0.02},${ev.position.coords.latitude-0.02},${ev.position.coords.longitude+0.02},${ev.position.coords.latitude+0.02}&layers=poi&outProj=4326`);
         const pois = await response.json();
 
         pois.features.forEach ( poi => {

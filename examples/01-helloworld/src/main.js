@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import * as LocAR from  'locar';
+import * as LocAR from 'locar';
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(60, window.innerWidth/window.innerHeight, 0.001, 100);
@@ -22,12 +22,12 @@ const cam = new LocAR.Webcam( {
     idealHeight: 768
 }, null);
 
-cam.on("webcamstarted", texture => {
-    scene.background = texture;
+cam.on("webcamstarted", ev => {
+    scene.background = ev.texture;
 });
 
-cam.on("webcamerror", (name, msg) => {
-	alert(`Webcam error: name ${name} msg ${msg}`);
+cam.on("webcamerror", error => {
+	alert(`Webcam error: code ${error.code} message ${error.message}`);
 });
 
 locar.fakeGps(-0.72, 51.05);
