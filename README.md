@@ -2,7 +2,7 @@
 
 Location-based AR from AR.js.
 
-**This is the `PR16` branch of LocAR.js, incorporating the improved event-handling system in issue #10 and pull request #16. It is currently untested on iOS devices. This distribution is not available on `npm`; you have to build it yourself (version `0.0.13-pre3`; use the tarball). If you want to work with A-Frame you also need to build the matching [locar-aframe.js](https://github.com/AR-js-org/locar-aframe.js) distribution, again the `PR16` branch, version `0.0.4-pre1` and maybe modify the path to `locar-aframe.js` in the examples `package.json`.**
+**This is the `PR16` branch of LocAR.js, incorporating the improved event-handling system in issue #10 and pull request #16. It is currently untested on iOS devices. This distribution is not available on `npm`; you have to build it yourself (version `0.0.13-pre3`; use the tarball). If you want to work with A-Frame you also need to build the matching [locar-aframe.js](https://github.com/AR-js-org/locar-aframe.js) distribution, again the `PR16` branch, version `0.0.4-pre2` and maybe modify the path to `locar-aframe.js` in the examples `package.json`.**
 
 ## What is this?
 
