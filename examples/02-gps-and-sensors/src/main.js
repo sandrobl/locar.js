@@ -13,15 +13,8 @@ const scene = new THREE.Scene();
 
 const locar = new LocAR.LocationBased(scene, camera);
 
-window.addEventListener("resize", ev => {
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-});
-
 const cam = new LocAR.Webcam( { 
-    idealWidth: 1024, 
-    idealHeight: 768
+    video: { facingMode: 'environment' }
 }, null);
 
 cam.on("webcamstarted", ev => {
@@ -30,6 +23,12 @@ cam.on("webcamstarted", ev => {
 
 cam.on("webcamerror", error => {
     alert(`Webcam error: code ${error.code} message ${error.message}`);
+});
+
+window.addEventListener("resize", ev => {
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
 });
 
 let firstLocation = true;

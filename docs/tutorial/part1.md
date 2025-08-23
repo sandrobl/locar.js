@@ -41,18 +41,23 @@ const cube = new THREE.Mesh(box, new THREE.MeshBasicMaterial({ color: 0xff0000 }
 
 const locar = new LocAR.LocationBased(scene, camera);
 const cam = new LocAR.Webcam({
-    idealWidth: 1024,
-    idealHeight: 768,
-    onVideoStarted: texture => {
-        scene.background = texture;
+    video: {
+        facingMode: "environment"
     }
+});
+
+cam.on("webcamstarted", ev => {
+    scene.background = ev.texture;
+});
+
+cam.on("webcamerror", error => {
+    alert(`Webcam error: code ${error.code} message ${error.message}`);
 });
 
 locar.fakeGps(-0.72, 51.05);
 locar.add(cube, -0.72, 51.0501);
 
 renderer.setAnimationLoop(animate);
-
 
 function animate() {
     renderer.render(scene, camera);
@@ -69,24 +74,36 @@ What comes next though is new, and specific to AR.js:
 ```javascript
 const locar = new LocAR.LocationBased(scene, camera);
 const cam = new LocAR.Webcam({
-    idealWidth: 1024,
-    idealHeight: 768,
-    onVideoStarted: texture => {
-        scene.background = texture;
+    video: {
+        facingMode: "environment"
     }
 });
 ```
 
-We use two new objects, both part of the LocAR.js API. Firstly `LocAR.LocationBased` is the overall AR.js "manager" object and secondly `LocAR.Webcam` is responsible for initialising the webcam. We need to supply our scene and camera as arguments to `LocAR.LocationBased` and an object of options as an argument to `LocAR.Webcam`. Of these options you can specify an ideal width and height for the webcam feed but you **must** supply an `onVideoStarted` callback. This runs as soon as the webcam feed is initialised. It receives a `THREE.VideoTexture` as a parameter which is used to set the background of the scene to the webcam feed.
+We use two new objects, both part of the LocAR.js API. Firstly `LocAR.LocationBased` is the overall AR.js "manager" object and secondly `LocAR.Webcam` is responsible for initialising the webcam. We need to supply our scene and camera as arguments to `LocAR.LocationBased` and the standard Media Devices API constraints object as an argument to `LocAR.Webcam`. If the constraints omitted, the webcam `video` will be set to a `facingMode` of `environment`, i.e. you see the world around you through the camera, not yourself.
+
+We then move on to setting up event handlers for the `LocAR.Webcam`.
+
+```javascript
+cam.on("webcamstarted", ev => {
+    scene.background = ev.texture;
+});
+
+cam.on("webcamerror", error => {
+    alert(`Webcam error: code ${error.code} message ${error.message}`);
+});
+```
+
+You **must** supply a `webcamstarted` event handler. This runs as soon as the webcam feed is initialised. It receives an event handler object containing a `texture` property. This is a `THREE.VideoTexture` which is used to set the background of the scene to the webcam feed.
+
+The `webcamerror` event handler allows you to report errors with initialising the webcam to the user.
 
 The `LocAR.Webcam` will, internally, create a `video` element to capture the webcam. Alternatively, if you have a `video` element already set up in your HTML, you can pass its CSS selector into the `Webcam` as an optional argument. For example:
 
 ```javascript
 const cam = new LocAR.Webcam({
-    idealWidth: 1024,
-    idealHeight: 768,
-    onVideoStarted: texture => {
-        scene.background = texture;
+    video: {
+        facingMode: "environment"
     }
 }, '#video1');
 ```

@@ -28,7 +28,7 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>Webcam<span class="signature">(options, videoElementSelector)</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>Webcam<span class="signature">(constraints, videoElementSelector)</span><span class="type-signature"></span></h2>
         
             <div class="class-description">Class to setup the webcam.</div>
         
@@ -45,7 +45,7 @@
     
 
     
-    <h4 class="name" id="Webcam"><span class="type-signature"></span>new Webcam<span class="signature">(options, videoElementSelector)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="Webcam"><span class="type-signature"></span>new Webcam<span class="signature">(constraints, videoElementSelector)</span><span class="type-signature"></span></h4>
     
 
     
@@ -89,7 +89,7 @@
 
         <tr>
             
-                <td class="name"><code>options</code></td>
+                <td class="name"><code>constraints</code></td>
             
 
             <td class="type">
@@ -106,11 +106,7 @@
             
 
             <td class="description last">options to use for initialising the camera. 
-Currently idealWidth and idealHeight properties are understood as well as 
-onVideoStarted(), a *required* callback which runs when the camera has
-been initialised. 
-This takes a THREE.VideoTexture as an argument which can be used to set 
-the background of your three.js scene within a callback.</td>
+The same constraints object as used by standard MediaDevices API.</td>
         </tr>
 
     
@@ -176,7 +172,7 @@ undefined), a video element will be created.</td>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="webcam.js.html">webcam.js</a>, <a href="webcam.js.html#line4">line 4</a>
+        <a href="webcam.js.html">webcam.js</a>, <a href="webcam.js.html#line5">line 5</a>
     </li></ul></dd>
     
 
@@ -285,7 +281,7 @@ Should be called when your application closes.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="webcam.js.html">webcam.js</a>, <a href="webcam.js.html#line65">line 65</a>
+        <a href="webcam.js.html">webcam.js</a>, <a href="webcam.js.html#line74">line 74</a>
     </li></ul></dd>
     
 
@@ -321,6 +317,421 @@ Should be called when your application closes.
     
 
     
+        <h3 class="subsection-title">Events</h3>
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="event:webcamerror">webcamerror</h4>
+    
+
+    
+
+
+
+<div class="description">
+    Webcam error event.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>event</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">object with 'code' and 'message' fields.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="webcam.js.html">webcam.js</a>, <a href="webcam.js.html#line47">line 47</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="event:webcamerror">webcamerror</h4>
+    
+
+    
+
+
+
+<div class="description">
+    Webcam error event.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>event</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">object with 'code' and 'message' fields.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="webcam.js.html">webcam.js</a>, <a href="webcam.js.html#line58">line 58</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="event:webcamstarted">webcamstarted</h4>
+    
+
+    
+
+
+
+<div class="description">
+    Webcam started event.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>event</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">object containing 'texture' - the texture the webcam will stream to.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="webcam.js.html">webcam.js</a>, <a href="webcam.js.html#line37">line 37</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    
 </article>
 
 </section>
@@ -331,13 +742,13 @@ Should be called when your application closes.
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="ClickHandler.html">ClickHandler</a></li><li><a href="DeviceOrientationControls.html">DeviceOrientationControls</a></li><li><a href="LocationBased.html">LocationBased</a></li><li><a href="SphMercProjection.html">SphMercProjection</a></li><li><a href="Webcam.html">Webcam</a></li></ul><h3>Events</h3><ul><li><a href="LocationBased.html#event:gpserror">gpserror</a></li><li><a href="LocationBased.html#event:gpsupdate">gpsupdate</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="ClickHandler.html">ClickHandler</a></li><li><a href="DeviceOrientationControls.html">DeviceOrientationControls</a></li><li><a href="LocationBased.html">LocationBased</a></li><li><a href="SphMercProjection.html">SphMercProjection</a></li><li><a href="Webcam.html">Webcam</a></li><li><a href="module.exports.html">exports</a></li></ul><h3>Events</h3><ul><li><a href="DeviceOrientationControls.html#event:deviceorientationerror">deviceorientationerror</a></li><li><a href="DeviceOrientationControls.html#event:deviceorientationgranted">deviceorientationgranted</a></li><li><a href="LocationBased.html#event:gpserror">gpserror</a></li><li><a href="LocationBased.html#event:gpsupdate">gpsupdate</a></li><li><a href="Webcam.html#event:webcamerror">webcamerror</a></li><li><a href="Webcam.html#event:webcamstarted">webcamstarted</a></li></ul><h3>Global</h3><ul><li><a href="global.html#emit">emit</a></li><li><a href="global.html#on">on</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Wed Jul 16 2025 11:48:20 GMT+0100 (British Summer Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sat Aug 23 2025 15:05:39 GMT+0100 (British Summer Time)
 </footer>
 
 <script> prettyPrint(); </script>

@@ -1,5 +1,15 @@
 # Updates
 
+## `0.1.0` (2025-08-23). 
+
+With significant improvements particularly on the iOS side, it's been decided to move up to an `0.1.0` release. Note that there are a few **breaking changes** with 0.1.0, particularly with initialising the `Webcam` and the `DeviceOrientationControls`. Please see the examples and the tutorial.
+
+- Many iOS enhancements, thanks to [Darian Elias Weiß](https://github.com/darianwwu) through [PR #16](https://github.com/AR-js-org/locar.js/pull/16) which provides a range of enhancements providing fixes for sensor handling on iOS and consistency between iOS and Android.
+
+- Improved event handling system giving developers more flexibility in error handling, fixing [issue #10](https://github.com/AR-js-org/locar.js/issues/10). 
+
+## Older updates
+
 - `0.0.12` (2025-05-25) - `DeviceOrientationControls` now takes `options` object which allows the specification of the `smoothingFactor`, like original AR.js.
 
 - `0.0.11` (2025-04-19) - separated out A-Frame API into own package `locar-aframe` for greater modularity.

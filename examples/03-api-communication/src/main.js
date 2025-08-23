@@ -8,13 +8,6 @@ const renderer = new THREE.WebGLRenderer({
 renderer.setSize(window.innerWidth, window.innerHeight);
 const scene = new THREE.Scene();
 
-
-window.addEventListener("resize", e => {
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-});
-
 const locar = new LocAR.LocationBased(scene, camera);
 
 const deviceControls = new LocAR.DeviceOrientationControls(camera);
@@ -28,17 +21,22 @@ deviceControls.on("deviceorientationerror", error => {
 
 deviceControls.init();
 
-const cam = new LocAR.Webcam({ 
-    idealWidth: 1024, 
-    idealHeight: 768
-});
+const cam = new LocAR.Webcam( { 
+    video: { facingMode: 'environment' }
+}, null);
 
 cam.on("webcamstarted", ev => {
     scene.background = ev.texture;
 });
 
 cam.on("webcamerror", error => {
-	alert(`Webcam error: code ${error.code} message ${error.message}`);
+    alert(`Webcam error: code ${error.code} message ${error.message}`);
+});
+
+window.addEventListener("resize", e => {
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
 });
 
 let firstPosition = true;

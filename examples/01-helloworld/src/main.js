@@ -9,17 +9,13 @@ renderer.setPixelRatio(window.devicePixelRatio);
 document.body.appendChild(renderer.domElement);
 
 
-window.addEventListener("resize", e => {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-});
-const box = new THREE.BoxGeometry(2,2,2);
+const box = new THREE.BoxGeometry(2, 2, 2);
 const cube = new THREE.Mesh(box, new THREE.MeshBasicMaterial({ color: 0xff0000 }));
 const locar = new LocAR.LocationBased(scene, camera);
 const cam = new LocAR.Webcam( { 
-    idealWidth: 1024, 
-    idealHeight: 768
+    video: {
+        facingMode: 'environment'
+    }
 }, null);
 
 cam.on("webcamstarted", ev => {
@@ -27,7 +23,13 @@ cam.on("webcamstarted", ev => {
 });
 
 cam.on("webcamerror", error => {
-	alert(`Webcam error: code ${error.code} message ${error.message}`);
+    alert(`Webcam error: code ${error.code} message ${error.message}`);
+});
+
+window.addEventListener("resize", e => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
 });
 
 locar.fakeGps(-0.72, 51.05);

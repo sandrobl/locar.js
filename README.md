@@ -2,8 +2,6 @@
 
 Location-based AR from AR.js.
 
-**This is the `PR16` branch of LocAR.js, incorporating the improved event-handling system in issue #10 and pull request #16. It is currently untested on iOS devices. This distribution is not available on `npm`; you have to build it yourself (version `0.0.13-pre3`; use the tarball). If you want to work with A-Frame you also need to build the matching [locar-aframe.js](https://github.com/AR-js-org/locar-aframe.js) distribution, again the `PR16` branch, version `0.0.4-pre2` and maybe modify the path to `locar-aframe.js` in the examples `package.json`.**
-
 ## What is this?
 
 LocAR.js is an AR.js project to develop a library focused specifically on location-based augmented reality in the browser. Currently it consists of the location-based three.js code from [the main AR.js repository](https://github.com/AR-js-org/AR.js), with some minor changes to make it compatible with latest versions (0.175.0 at time of writing) of three.js.
@@ -24,7 +22,9 @@ Some of these issues, such as incorrect North on some devices, may well be to do
 
 ## Cross-platform Compatibility
 
-Chrome on Android is recommended. It may also work on Chrome in iOS; please file an issue if not. It will not work on Safari on iOS, due to permissions issues - **though pull requests are welcome to fix this**. Firefox unfortunately does not appear to fully implement the Device Orientation API so is unlikely to work
+It should now work on Chrome (and possibly Safari) on iOS as well as Android, due to a number of recent iOS fixes by project contributors.
+
+Firefox unfortunately does not appear to fully implement the Device Orientation API so is unlikely to work.
 
 ## Using the library
 
@@ -42,7 +42,7 @@ import * as LocAR from 'locar';
 as long as you include `locar` as a dependency, e.g. in your `package.json`:
 ```
 "dependencies": {
-   "locar" : "^0.0.11",
+   "locar" : "^0.1.0",
    "three" : "^0.175.0"
 }
 ```
@@ -56,6 +56,10 @@ Please see [here](https://ar-js-org.github.io/locar.js/api) for full API documen
 ## Tutorial
 
 Please see [here](https://github.com/AR-js-org/locar.js/blob/master/docs/tutorial/index.md) for a tutorial introducing LocAR.js.
+
+## Contributors
+
+Many thanks to all contributors to the project, in particular [Darian Elias Weiß](https://github.com/darianwwu) and [Kazuhiro Matsuyama](https://github.com/ma2yama) for providing extremely valuable iOS fixes and enhancements.
 
 ## Disclaimer
 

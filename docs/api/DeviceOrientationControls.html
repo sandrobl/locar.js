@@ -125,7 +125,7 @@
 
             
 
-            <td class="description last">options for DeviceOrientationControls: currently accepts smoothingFactor</td>
+            <td class="description last">options for DeviceOrientationControls: currently accepts smoothingFactor, enablePermissionDialog</td>
         </tr>
 
     
@@ -166,7 +166,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="device-orientation-controls.js.html">device-orientation-controls.js</a>, <a href="device-orientation-controls.js.html#line41">line 41</a>
+        <a href="device-orientation-controls.js.html">device-orientation-controls.js</a>, <a href="device-orientation-controls.js.html#line43">line 43</a>
     </li></ul></dd>
     
 
@@ -232,6 +232,11 @@
 <div class="description">
     Update the device orientation controls.
 Should be called from your three.js rendering/animation function.
+Permission handling now factored out into requestOrientationPermissions()
+Therefore, connect() should now only be called once permission has been
+granted, ie after the "deviceorientationgranted" event has been emitted.
+This is a breaking change and now means that you need to call connect()
+yourself - previously it was done automatically.
 </div>
 
 
@@ -275,7 +280,7 @@ Should be called from your three.js rendering/animation function.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="device-orientation-controls.js.html">device-orientation-controls.js</a>, <a href="device-orientation-controls.js.html#line122">line 122</a>
+        <a href="device-orientation-controls.js.html">device-orientation-controls.js</a>, <a href="device-orientation-controls.js.html#line136">line 136</a>
     </li></ul></dd>
     
 
@@ -311,6 +316,832 @@ Should be called from your three.js rendering/animation function.
     
 
     
+        <h3 class="subsection-title">Events</h3>
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="event:deviceorientationerror">deviceorientationerror</h4>
+    
+
+    
+
+
+
+<div class="description">
+    Device orientation error event.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>error</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">object with 'code' and 'message' fields.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="device-orientation-controls.js.html">device-orientation-controls.js</a>, <a href="device-orientation-controls.js.html#line191">line 191</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="event:deviceorientationerror">deviceorientationerror</h4>
+    
+
+    
+
+
+
+<div class="description">
+    Device orientation error event.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>error</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">object with 'code' and 'message' fields.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="device-orientation-controls.js.html">device-orientation-controls.js</a>, <a href="device-orientation-controls.js.html#line203">line 203</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="event:deviceorientationerror">deviceorientationerror</h4>
+    
+
+    
+
+
+
+<div class="description">
+    Device orientation error event.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>error</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">object with 'code' and 'message' fields.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="device-orientation-controls.js.html">device-orientation-controls.js</a>, <a href="device-orientation-controls.js.html#line481">line 481</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="event:deviceorientationerror">deviceorientationerror</h4>
+    
+
+    
+
+
+
+<div class="description">
+    Device orientation error event.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>error</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">object with 'code' and 'message' fields.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="device-orientation-controls.js.html">device-orientation-controls.js</a>, <a href="device-orientation-controls.js.html#line491">line 491</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="event:deviceorientationgranted">deviceorientationgranted</h4>
+    
+
+    
+
+
+
+<div class="description">
+    Device orientation granted event.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>event</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">object with 'target' field, referencing the DeviceOrientationControls object.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="device-orientation-controls.js.html">device-orientation-controls.js</a>, <a href="device-orientation-controls.js.html#line182">line 182</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="event:deviceorientationgranted">deviceorientationgranted</h4>
+    
+
+    
+
+
+
+<div class="description">
+    Device orientation granted event.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>event</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">object with 'target' field, referencing the DeviceOrientationControls object.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="device-orientation-controls.js.html">device-orientation-controls.js</a>, <a href="device-orientation-controls.js.html#line510">line 510</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    
 </article>
 
 </section>
@@ -321,13 +1152,13 @@ Should be called from your three.js rendering/animation function.
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="ClickHandler.html">ClickHandler</a></li><li><a href="DeviceOrientationControls.html">DeviceOrientationControls</a></li><li><a href="LocationBased.html">LocationBased</a></li><li><a href="SphMercProjection.html">SphMercProjection</a></li><li><a href="Webcam.html">Webcam</a></li></ul><h3>Events</h3><ul><li><a href="LocationBased.html#event:gpserror">gpserror</a></li><li><a href="LocationBased.html#event:gpsupdate">gpsupdate</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="ClickHandler.html">ClickHandler</a></li><li><a href="DeviceOrientationControls.html">DeviceOrientationControls</a></li><li><a href="LocationBased.html">LocationBased</a></li><li><a href="SphMercProjection.html">SphMercProjection</a></li><li><a href="Webcam.html">Webcam</a></li><li><a href="module.exports.html">exports</a></li></ul><h3>Events</h3><ul><li><a href="DeviceOrientationControls.html#event:deviceorientationerror">deviceorientationerror</a></li><li><a href="DeviceOrientationControls.html#event:deviceorientationgranted">deviceorientationgranted</a></li><li><a href="LocationBased.html#event:gpserror">gpserror</a></li><li><a href="LocationBased.html#event:gpsupdate">gpsupdate</a></li><li><a href="Webcam.html#event:webcamerror">webcamerror</a></li><li><a href="Webcam.html#event:webcamstarted">webcamstarted</a></li></ul><h3>Global</h3><ul><li><a href="global.html#emit">emit</a></li><li><a href="global.html#on">on</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Wed Jul 16 2025 11:48:20 GMT+0100 (British Summer Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sat Aug 23 2025 15:05:39 GMT+0100 (British Summer Time)
 </footer>
 
 <script> prettyPrint(); </script>

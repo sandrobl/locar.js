@@ -13,9 +13,7 @@ const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 const scene = new THREE.Scene();
 
-
 document.body.appendChild(renderer.domElement);
-
 
 window.addEventListener("resize", e => {
     renderer.setSize(window.innerWidth, window.innerHeight);
@@ -25,14 +23,30 @@ window.addEventListener("resize", e => {
 
 const locar = new LocAR.LocationBased(scene, camera);
 
-const deviceControls = new LocAR.DeviceOrientationControls(camera);
+const deviceOrientationControls = new LocAR.DeviceOrientationControls(camera);
+
+deviceOrientationControls.on("deviceorientationgranted", ev => {
+    ev.target.connect();
+});
+
+deviceOrientationControls.on("deviceorientationerror", error => {
+    alert(`Device orientation error: code ${error.code} message ${error.message}`);
+});
+
+deviceOrientationControls.init();
 
 const cam = new LocAR.Webcam({
-    idealWidth: 1024,
-    idealHeight: 768,
-    onVideoStarted: texture => {
-        scene.background = texture;
+    video: {
+        facingMode: "environment"
     }
+});
+
+cam.on("webcamstarted", ev => {
+    scene.background = ev.texture;
+});
+
+cam.on("webcamerror", error => {
+    alert(`Webcam error: code ${error.code} message ${error.message}`);
 });
 
 let firstPosition = true;
@@ -43,11 +57,15 @@ const cube = new THREE.BoxGeometry(20, 20, 20);
 
 const clickHandler = new LocAR.ClickHandler(renderer);
 
-locar.on("gpsupdate", async(pos, distMoved) => {
+locar.on("gpserror", error => {
+    alert(`GPS error: ${error.code}`);
+});
+
+locar.on("gpsupdate", async(ev, distMoved) => {
     
     if(firstPosition || distMoved > 100) {
 
-        const response = await fetch(`https://hikar.org/webapp/map?bbox=${pos.coords.longitude-0.02},${pos.coords.latitude-0.02},${pos.coords.longitude+0.02},${pos.coords.latitude+0.02}&layers=poi&outProj=4326`);
+        const response = await fetch(`https://hikar.org/webapp/map?bbox=${ev.position.coords.longitude-0.02},${ev.position.coords.latitude-0.02},${ev.position.coords.longitude+0.02},${ev.position.coords.latitude+0.02}&layers=poi&outProj=4326`);
         const pois = await response.json();
 
         pois.features.forEach ( poi => {
@@ -74,15 +92,15 @@ locar.startGps();
 renderer.setAnimationLoop(animate);
 
 function animate() {
-    deviceControls.update();
+    deviceOrientationControls.update();
     renderer.render(scene, camera);
 }
 
 ```
 
-How is this working? The key thing is we **handle the `gpsupdate` event** emitted by the `LocationBased` object when a GPS update occurs. This is specifically emitted when the inbuilt Geolocation API receives a GPS update, and allows us to trigger certain code.
+How is this working? The key thing is we **handle the `gpsupdate` event** once more.
 
-Here, we trigger a download from a web API when we get the update. Note that the `gpsupdate` event handler receives the standard position object of the Geolocation API, so that, for example, its `coords` property contains the longitude and latitude. We then download data in a 0.02 x 0.02 degree box centred on our current location from the API at https://hikar.org. This provides [OpenStreetMap](https://openstreetmap.org) POI data, but only for Europe and Turkey due to server capacity constraints. The data is provided as [GeoJSON](https://geojson.org).
+Here, we trigger a download from a web API when we get the update. As we saw in [Part 2](part2.md), the `gpsupdate` event handler receives the standard position object of the Geolocation API, so that, for example, its `coords` property contains the longitude and latitude. It also takes a second parameter, `distMoved`, representing the distance moved in metres since the last update, which means we only fetch from the server if we have moved a certain distance (100m here). We then download data in a 0.02 x 0.02 degree box centred on our current location from the API at https://hikar.org. This provides [OpenStreetMap](https://openstreetmap.org) POI data, but only for Europe and Turkey due to server capacity constraints. The data is provided as [GeoJSON](https://geojson.org).
 
 So having received the data, we simply loop through it and create one `THREE.Mesh` for each POI, adding it at the appropriate location (accessible via the `coordinates` of the `geometry` of each GeoJSON object).
 

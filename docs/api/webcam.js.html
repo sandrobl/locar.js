@@ -27,62 +27,71 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>import * as THREE from "three";
+import EventEmitter from './event-emitter.js';
 
 /** Class to setup the webcam. */
-class Webcam {
+class Webcam extends EventEmitter {
+ #video;
+
   /**
    * Create a Webcam.
-   * @param options {Object} - options to use for initialising the camera. 
-   * Currently idealWidth and idealHeight properties are understood as well as 
-   * onVideoStarted(), a *required* callback which runs when the camera has
-   * been initialised. 
-   * This takes a THREE.VideoTexture as an argument which can be used to set 
-   * the background of your three.js scene within a callback.
+   * @param constraints {Object} - options to use for initialising the camera. 
+   * The same constraints object as used by standard MediaDevices API.
    * @param {string} videoElementSelector - selector to obtain the HTML video 
    * element to render the webcam feed. If a falsy value (e.g. null or 
    * undefined), a video element will be created.
    */
- constructor(options={}, videoElementSelector) {
+
+
+ constructor(constraints={video:{facingMode: 'environment'}}, videoElementSelector) {
+    super();
     this.sceneWebcam = new THREE.Scene();
-    let video;
     if (!videoElementSelector) {
-      video = document.createElement("video");
-      video.setAttribute("autoplay", true);
-      video.setAttribute("playsinline", true);
-      video.style.display = "none";
-      document.body.appendChild(video);
+      this.#video = document.createElement("video");
+      this.#video.setAttribute("autoplay", true);
+      this.#video.setAttribute("playsinline", true);
+      this.#video.style.display = "none";
+      document.body.appendChild(this.#video);
     } else {
-      video = document.querySelector(videoElementSelector);
+      this.#video = document.querySelector(videoElementSelector);
     }
-    this.texture = new THREE.VideoTexture(video);
+    this.texture = new THREE.VideoTexture(this.#video);
     if (navigator.mediaDevices &amp;&amp; navigator.mediaDevices.getUserMedia) {
-      const constraints = {
-        video: {
-          width: { ideal: options.idealWidth || 1280 },
-          height: { ideal: options.idealHeight || 720 },
-          facingMode: "environment",
-        },
-      };
       navigator.mediaDevices.getUserMedia(constraints).then ( stream => {
-        video.addEventListener('loadedmetadata', () => {
-          video.setAttribute('width', video.videoWidth);
-          video.setAttribute('height', video.videoHeight);
-          video.play();
-          options.onVideoStarted?.call(this, this.texture);
+        this.#video.addEventListener('loadedmetadata', () => {
+          this.#video.setAttribute('width', this.#video.videoWidth);
+          this.#video.setAttribute('height', this.#video.videoHeight);
+          this.#video.play();
+          /**
+           * Webcam started event. 
+           * @event Webcam#webcamstarted
+           * @param {Object} event object containing 'texture' - the texture the webcam will stream to.
+           */
+          this.emit("webcamstarted", { texture: this.texture });
         });
-        video.srcObject = stream;
+        this.#video.srcObject = stream;
       })
       .catch(e => {
-        setTimeout(() => {
-          alert(
-            "Webcam Error\nName: " + e.name + "\nMessage: " + e.message
-          );
-        }, 1000)
+       /**
+        * Webcam error event. 
+        * @event Webcam#webcamerror
+        * @param {Object} event object with 'code' and 'message' fields. 
+        */
+        this.emit("webcamerror", {
+            code: e.name, 
+            message: e.message
+        });
       })
     } else {
-      setTimeout(() => {
-          alert("sorry - media devices API not supported");
-        }, 1000);
+       /**
+        * Webcam error event. 
+        * @event Webcam#webcamerror
+        * @param {Object} event object with 'code' and 'message' fields. 
+        */
+      this.emit("webcamerror", {
+        code: "LOCAR_NO_MEDIA_DEVICES_API",
+        message: "Media devices API not supported"
+      });
     }
   }
 
@@ -106,13 +115,13 @@ export default Webcam;
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="ClickHandler.html">ClickHandler</a></li><li><a href="DeviceOrientationControls.html">DeviceOrientationControls</a></li><li><a href="LocationBased.html">LocationBased</a></li><li><a href="SphMercProjection.html">SphMercProjection</a></li><li><a href="Webcam.html">Webcam</a></li></ul><h3>Events</h3><ul><li><a href="LocationBased.html#event:gpserror">gpserror</a></li><li><a href="LocationBased.html#event:gpsupdate">gpsupdate</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="ClickHandler.html">ClickHandler</a></li><li><a href="DeviceOrientationControls.html">DeviceOrientationControls</a></li><li><a href="LocationBased.html">LocationBased</a></li><li><a href="SphMercProjection.html">SphMercProjection</a></li><li><a href="Webcam.html">Webcam</a></li><li><a href="module.exports.html">exports</a></li></ul><h3>Events</h3><ul><li><a href="DeviceOrientationControls.html#event:deviceorientationerror">deviceorientationerror</a></li><li><a href="DeviceOrientationControls.html#event:deviceorientationgranted">deviceorientationgranted</a></li><li><a href="LocationBased.html#event:gpserror">gpserror</a></li><li><a href="LocationBased.html#event:gpsupdate">gpsupdate</a></li><li><a href="Webcam.html#event:webcamerror">webcamerror</a></li><li><a href="Webcam.html#event:webcamstarted">webcamstarted</a></li></ul><h3>Global</h3><ul><li><a href="global.html#emit">emit</a></li><li><a href="global.html#on">on</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Wed Jul 16 2025 11:48:20 GMT+0100 (British Summer Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sat Aug 23 2025 15:05:39 GMT+0100 (British Summer Time)
 </footer>
 
 <script> prettyPrint(); </script>

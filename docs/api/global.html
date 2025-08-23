@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: ClickHandler</title>
+    <title>JSDoc: Global</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: ClickHandler</h1>
+    <h1 class="page-title">Global</h1>
 
     
 
@@ -28,10 +28,7 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>ClickHandler<span class="signature">(renderer)</span><span class="type-signature"></span></h2>
-        
-            <div class="class-description">Class to handle object detection via mouse clicks/touch events 
-and raycasting.</div>
+        <h2></h2>
         
     
 </header>
@@ -41,82 +38,7 @@ and raycasting.</div>
     
         
 
-    
-    <h2>Constructor</h2>
-    
-
-    
-    <h4 class="name" id="ClickHandler"><span class="type-signature"></span>new ClickHandler<span class="signature">(renderer)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Create a ClickHandler.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
         
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>renderer</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">THREE.WebGLRenderer</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The Three.js renderer on which the click
-events will be handled.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
 
 
 <dl class="details">
@@ -146,11 +68,6 @@ events will be handled.</td>
     
 
     
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="click-handler.js.html">click-handler.js</a>, <a href="click-handler.js.html#line7">line 7</a>
-    </li></ul></dd>
-    
 
     
 
@@ -160,24 +77,7 @@ events will be handled.</td>
 </dl>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        
     
     </div>
 
@@ -204,7 +104,7 @@ events will be handled.</td>
     
 
     
-    <h4 class="name" id="raycast"><span class="type-signature"></span>raycast<span class="signature">(camera, scene)</span><span class="type-signature"> &rarr; {Array}</span></h4>
+    <h4 class="name" id="emit"><span class="type-signature"></span>emit<span class="signature">(eventName)</span><span class="type-signature"></span></h4>
     
 
     
@@ -212,7 +112,7 @@ events will be handled.</td>
 
 
 <div class="description">
-    Cast a ray into the scene to detect objects.
+    Emit an event.
 </div>
 
 
@@ -248,13 +148,13 @@ events will be handled.</td>
 
         <tr>
             
-                <td class="name"><code>camera</code></td>
+                <td class="name"><code>eventName</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">THREE.Camera</span>
+<span class="param-type">string</span>
 
 
             
@@ -264,23 +164,17 @@ events will be handled.</td>
 
             
 
-            <td class="description last">The active Three.js camera, from which the ray
-will be cast.</td>
+            <td class="description last">the event to emit.</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>scene</code></td>
+                <td class="name"><code>...params</code></td>
             
 
             <td class="type">
-            
-                
-<span class="param-type">THREE.Scene</span>
-
-
             
             </td>
 
@@ -288,8 +182,7 @@ will be cast.</td>
 
             
 
-            <td class="description last">The active Three.js scene, which the ray will be
-cast into.</td>
+            <td class="description last">parameters to pass to the event handler.</td>
         </tr>
 
     
@@ -330,7 +223,7 @@ cast into.</td>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="click-handler.js.html">click-handler.js</a>, <a href="click-handler.js.html#line34">line 34</a>
+        <a href="event-emitter.js.html">event-emitter.js</a>, <a href="event-emitter.js.html#line21">line 21</a>
     </li></ul></dd>
     
 
@@ -355,28 +248,166 @@ cast into.</td>
 
 
 
-<h5>Returns:</h5>
+
+
+
+
 
         
-<div class="param-desc">
-    - array of all intersected objects.
+            
+
+    
+
+    
+    <h4 class="name" id="on"><span class="type-signature"></span>on<span class="signature">(eventName, eventHandler)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Add an event handler.
 </div>
 
 
 
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
         
-<span class="param-type">Array</span>
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>eventName</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
 
 
-    </dd>
-</dl>
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">the event to handle.</td>
+        </tr>
 
     
+
+        <tr>
+            
+                <td class="name"><code>eventHandler</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">the event handler function.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="event-emitter.js.html">event-emitter.js</a>, <a href="event-emitter.js.html#line12">line 12</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

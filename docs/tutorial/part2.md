@@ -29,12 +29,19 @@ const box = new THREE.BoxGeometry(2,2,2);
 const cube = new THREE.Mesh(box, new THREE.MeshBasicMaterial({ color: 0xff0000 }));
 
 const locar = new LocAR.LocationBased(scene, camera);
+
 const cam = new LocAR.Webcam({
-    idealWidth: 1024,
-    idealHeight: 768,
-    onVideoStarted: texture => {
-        scene.background = texture;
+    video: {
+        facingMode: "environment"
     }
+});
+
+cam.on("webcamstarted", ev => {
+    scene.background = ev.texture;
+});
+
+cam.on("webcamerror", error => {
+    alert(`Webcam error: code ${error.code} message ${error.message}`);
 });
 
 
@@ -82,37 +89,71 @@ const box = new THREE.BoxGeometry(2,2,2);
 const cube = new THREE.Mesh(box, new THREE.MeshBasicMaterial({ color: 0xff0000 }));
 
 const locar = new LocAR.LocationBased(scene, camera);
+
 const cam = new LocAR.Webcam({
-    idealWidth: 1024,
-    idealHeight: 768,
-    onVideoStarted: texture => {
-        scene.background = texture;
+    video: {
+        facingMode: "environment"
     }
+});
+
+cam.on("webcamstarted", ev => {
+    scene.background = ev.texture;
+});
+
+cam.on("webcamerror", error => {
+    alert(`Webcam error: code ${error.code} message ${error.message}`);
 });
 
 // Create the device orientation tracker
 const deviceOrientationControls = new LocAR.DeviceOrientationControls(camera);
 
+deviceOrientationControls.on("deviceorientationgranted", ev => {
+    ev.target.connect();
+});
+
+deviceOrientationControls.on("deviceorientationerror", error => {
+    alert(`Device orientation error: code ${error.code} message ${error.message}`);
+});
+
+deviceOrientationControls.init();
 locar.startGps();
 locar.add(cube, -0.72, 51.0501);
 
 renderer.setAnimationLoop(animate);
 
-
 function animate() {
     // Update the scene using the latest sensor readings
     deviceOrientationControls.update();
-
     renderer.render(scene, camera);
 }
 ```
 
-Note how we create a device orientation tracker with:
+Note how we create a device orientation tracker to read from the device sensors as follows:
 ```javascript
 const deviceOrientationControls = new LocAR.DeviceOrientationControls(camera);
 ```
 
 The device orientation tracker updates the camera, so we need to pass it in as an argument.
+
+
+You then need to setup `deviceorientationgranted` and `deviceorientationerror` event handlers for the `DeviceOrientationControls` object. On iOS the user must grant permission to use the sensors, and the first event handler runs as soon as this is done. (On Android, this first event handler runs straight away).
+
+The `deviceorientationerror` event handler allows you to report errors with the device orientation (sensor) API to the user.
+
+```javascript
+deviceOrientationControls.on("deviceorientationgranted", ev => {
+    ev.target.connect();
+});
+
+deviceOrientationControls.on("deviceorientationerror", error => {
+    alert(`Device orientation error: code ${error.code} message ${error.message}`);
+});
+```
+You then need to start the sensor tracking:
+```javascript
+deviceOrientationControls.init();
+```
+
 
 Also note how we update the device orientation tracker in our rendering function, so that new readings from the sensors are accounted for:
 
@@ -150,19 +191,40 @@ window.addEventListener("resize", e => {
     camera.updateProjectionMatrix();
 });
 
+
 const cam = new LocAR.Webcam({
-    idealWidth: 1024,
-    idealHeight: 768,
-    onVideoStarted: texture => {
-        scene.background = texture;
+    video: {
+        facingMode: "environment"
     }
+});
+
+cam.on("webcamstarted", ev => {
+    scene.background = ev.texture;
+});
+
+cam.on("webcamerror", error => {
+    alert(`Webcam error: code ${error.code} message ${error.message}`);
 });
 
 let firstLocation = true;
 
 const deviceOrientationControls = new LocAR.DeviceOrientationControls(camera);
 
-locar.on("gpsupdate", (pos, distMoved) => {
+deviceOrientationControls.on("deviceorientationgranted", ev => {
+    ev.target.connect();
+});
+
+deviceOrientationControls.on("deviceorientationerror", error => {
+    alert(`Device orientation error: code ${error.code} message ${error.message}`);
+});
+
+deviceOrientationControls.init();
+
+locar.on("gpserror", error => {
+    alert(`GPS error: ${error.code}`);
+});
+
+locar.on("gpsupdate", ev => {
     if(firstLocation) {
 
         const boxProps = [{
@@ -193,8 +255,8 @@ locar.on("gpsupdate", (pos, distMoved) => {
         
             locar.add(
                 mesh, 
-                pos.coords.longitude + boxProp.lonDis, 
-                pos.coords.latitude + boxProp.latDis
+                ev.position.coords.longitude + boxProp.lonDis, 
+                ev.position.coords.latitude + boxProp.latDis
             );
         }
         
@@ -211,6 +273,8 @@ function animate() {
     renderer.render(scene, camera);
 }
 ```
-Note how it works: when we get a location, we check whether this was the first GPS location obtained (to prevent the same boxes being added each time our GPS location changes). If it was, we add four boxes a short distance to the north (red), south (yellow), west (cyan) and east (green) of us. These are around 50 metres from our original position.
+Note how we handle the `gpserror` and `gpsupdate` events of our `locar` object. The `gpserror` event runs whenever there is an error communicating with the GPS: the error code is the standard Geolocation API error code. 
+
+The `gpsupdate` event runs whenever we get a new GPS location. This takes an event object with a `position` property containing the standard position object from the Geolocation API, so we can use its `coords` to get the GPS location. when we get a location, we check whether this was the first GPS location obtained (to prevent the same boxes being added each time our GPS location changes). If it was, we add four boxes a short distance to the north (red), south (yellow), west (cyan) and east (green) of us. These are around 50 metres from our original position.
 
 Try it out, and if your sensors are calibrated correctly, you will see a red box to your north, a yellow box to your south, a cyan (light blue) box to your west and a green box to your east. These are relative to your *initial* position so as you move, the boxes' positions relative to you will change. Remember the boxes are around 50 metres from your original position, so you will have to move some distance (maybe around 10 metres) to see a difference.
