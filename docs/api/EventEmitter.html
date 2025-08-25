@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: Webcam</title>
+    <title>JSDoc: Class: EventEmitter</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: Webcam</h1>
+    <h1 class="page-title">Class: EventEmitter</h1>
 
     
 
@@ -28,9 +28,9 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>Webcam<span class="signature">(constraints, videoElementSelector)</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>EventEmitter<span class="signature">()</span><span class="type-signature"></span></h2>
         
-            <div class="class-description">Class to setup the webcam.</div>
+            <div class="class-description">Event emitter class to handle events.</div>
         
     
 </header>
@@ -45,98 +45,19 @@
     
 
     
-    <h4 class="name" id="Webcam"><span class="type-signature"></span>new Webcam<span class="signature">(constraints, videoElementSelector)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="EventEmitter"><span class="type-signature"></span>new EventEmitter<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
 
 
 
-<div class="description">
-    Create a Webcam.
-</div>
 
 
 
 
 
 
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>constraints</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">options to use for initialising the camera. 
-This is the same constraints object as used by standard MediaDevices API.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>videoElementSelector</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">selector to obtain the HTML video 
-element to render the webcam feed. If a falsy value (e.g. null or 
-undefined), a video element will be created.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
 
 
 
@@ -172,7 +93,7 @@ undefined), a video element will be created.</td>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="webcam.js.html">webcam.js</a>, <a href="webcam.js.html#line5">line 5</a>
+        <a href="event-emitter.js.html">event-emitter.js</a>, <a href="event-emitter.js.html#line2">line 2</a>
     </li></ul></dd>
     
 
@@ -228,7 +149,7 @@ undefined), a video element will be created.</td>
     
 
     
-    <h4 class="name" id="dispose"><span class="type-signature"></span>dispose<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="emit"><span class="type-signature"></span>emit<span class="signature">(eventName)</span><span class="type-signature"></span></h4>
     
 
     
@@ -236,104 +157,7 @@ undefined), a video element will be created.</td>
 
 
 <div class="description">
-    Free up the memory associated with the webcam.
-Should be called when your application closes.
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="webcam.js.html">webcam.js</a>, <a href="webcam.js.html#line69">line 69</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-    
-
-    
-
-    
-        <h3 class="subsection-title">Events</h3>
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="event:webcamerror">webcamerror</h4>
-    
-
-    
-
-
-
-<div class="description">
-    Webcam error event.
+    Emit an event.
 </div>
 
 
@@ -369,13 +193,13 @@ Should be called when your application closes.
 
         <tr>
             
-                <td class="name"><code>event</code></td>
+                <td class="name"><code>eventName</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Object</span>
+<span class="param-type">string</span>
 
 
             
@@ -385,7 +209,25 @@ Should be called when your application closes.
 
             
 
-            <td class="description last">object with 'code' and 'message' fields.</td>
+            <td class="description last">the event to emit.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>...params</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">parameters to pass to the event handler.</td>
         </tr>
 
     
@@ -426,7 +268,7 @@ Should be called when your application closes.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="webcam.js.html">webcam.js</a>, <a href="webcam.js.html#line47">line 47</a>
+        <a href="event-emitter.js.html">event-emitter.js</a>, <a href="event-emitter.js.html#line21">line 21</a>
     </li></ul></dd>
     
 
@@ -462,7 +304,7 @@ Should be called when your application closes.
     
 
     
-    <h4 class="name" id="event:webcamstarted">webcamstarted</h4>
+    <h4 class="name" id="on"><span class="type-signature"></span>on<span class="signature">(eventName, eventHandler)</span><span class="type-signature"></span></h4>
     
 
     
@@ -470,7 +312,7 @@ Should be called when your application closes.
 
 
 <div class="description">
-    Webcam started event.
+    Add an event handler.
 </div>
 
 
@@ -506,13 +348,13 @@ Should be called when your application closes.
 
         <tr>
             
-                <td class="name"><code>event</code></td>
+                <td class="name"><code>eventName</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Object</span>
+<span class="param-type">string</span>
 
 
             
@@ -522,7 +364,30 @@ Should be called when your application closes.
 
             
 
-            <td class="description last">object containing 'texture' - the texture the webcam will stream to.</td>
+            <td class="description last">the event to handle.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>eventHandler</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">the event handler function.</td>
         </tr>
 
     
@@ -563,7 +428,7 @@ Should be called when your application closes.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="webcam.js.html">webcam.js</a>, <a href="webcam.js.html#line37">line 37</a>
+        <a href="event-emitter.js.html">event-emitter.js</a>, <a href="event-emitter.js.html#line12">line 12</a>
     </li></ul></dd>
     
 
@@ -594,6 +459,10 @@ Should be called when your application closes.
 
 
         
+    
+
+    
+
     
 </article>
 
