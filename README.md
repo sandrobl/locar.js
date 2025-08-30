@@ -22,7 +22,7 @@ Some of these issues, such as incorrect North on some devices, may well be to do
 
 ## Cross-platform Compatibility
 
-It should now work on Chrome (and possibly Safari) on iOS as well as Android, due to a number of recent iOS fixes by project contributors.
+It should now work on Chrome and Safari on iOS as well as Android, due to a number of recent iOS fixes by project contributors.
 
 Firefox unfortunately does not appear to fully implement the Device Orientation API so is unlikely to work.
 
