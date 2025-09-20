@@ -16,7 +16,7 @@
   "scripts": {
     "lint": "eslint ./lib --ext .js,.json,.css",
     "lint:fix": "prettier --write ./lib && eslint ./lib --ext .js,.json,.css --fix",
-    "build": "vite build && npm pack",
+    "build": "npm run lint && vite build && npm pack",
     "makedocs": "jsdoc -r lib -d docs/api"
   },
   "devDependencies": {
