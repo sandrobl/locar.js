@@ -14,10 +14,17 @@
     }
   },
   "scripts": {
+    "lint": "eslint ./lib --ext .js,.json,.css",
+    "lint:fix": "eslint ./lib --ext .js,.json,.css --fix",
     "build": "vite build && npm pack",
     "makedocs": "jsdoc -r lib -d docs/api"
   },
   "devDependencies": {
+    "@eslint/css": "^0.11.0",
+    "@eslint/js": "^9.35.0",
+    "@eslint/json": "^0.13.2",
+    "eslint": "^9.35.0",
+    "globals": "^16.4.0",
     "jsdoc": "^4.0.4",
     "vite": "^7.1.3"
   },
