@@ -2,6 +2,10 @@
 
 This directory provides a series of examples for LocAR.js. 
 
+```bash
+npm run dev 
+```
+
 ## Live online examples
 
 Live online versions of these examples are available [on GitHub Pages](https://ar-js-org.github.io/locar.js). If you want to just run the examples, this is the best way of doing it.
