@@ -1,5 +1,18 @@
 # LocAR.js
 
+How to run it. 
+
+```bash
+npm run dev
+```
+
+Needs to be served via HTTPS! 
+
+Don't forget to install everything
+```
+npm install
+```
+
 Location-based AR from AR.js.
 
 ## What is this?
