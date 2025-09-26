@@ -4,10 +4,13 @@ import * as LocAR from 'locar';
 // === Example configuration ==================================================
 // Dedicated point-of-interest used in this scenario. Only this location will
 // be visualised so the behaviour is predictable while testing.
-const POI_COORDINATES = Object.freeze({
+const INITIAL_POI_COORDINATES = {
     latitude: 47.41047675920058,
     longitude: 9.332869851461123
-});
+};
+
+// Amount of movement (in metres) applied every time a direction button is pressed.
+const MOVEMENT_STEP_METERS = 5;
 
 // Friendly colour to make the POI stand out against the camera feed.
 const POI_COLOUR = 0xff3366;
@@ -49,6 +52,13 @@ window.addEventListener('resize', () => {
 // === Device orientation controls ===========================================
 let firstLocation = true;
 let poiPlaced = false;
+let poiMesh = null;
+
+// Mutable copy of the POI coordinates so the user can nudge the marker.
+const poiState = {
+    latitude: INITIAL_POI_COORDINATES.latitude,
+    longitude: INITIAL_POI_COORDINATES.longitude
+};
 const deviceOrientationControls = new LocAR.DeviceOrientationControls(camera);
 
 deviceOrientationControls.on('deviceorientationgranted', ev => {
@@ -72,9 +82,15 @@ locar.on('gpsupdate', ev => {
         firstLocation = false;
     }
 
+    updateDeviceLabel(ev.position.coords.latitude, ev.position.coords.longitude);
+
     if (!poiPlaced) {
-        locar.add(createPoiMarker(), POI_COORDINATES.longitude, POI_COORDINATES.latitude);
+        poiMesh = createPoiMarker();
+        locar.add(poiMesh, poiState.longitude, poiState.latitude);
         poiPlaced = true;
+        syncPoiInputs();
+    } else {
+        updatePoiPosition();
     }
 });
 
@@ -82,12 +98,20 @@ locar.on('gpsupdate', ev => {
 locar.startGps();
 
 // === Testing helpers ========================================================
+const fakeLatInput = document.getElementById('fakeLat');
+const fakeLonInput = document.getElementById('fakeLon');
 const setFakeButton = document.getElementById('setFakeLoc');
 const resumeRealGpsButton = document.getElementById('resumeRealGps');
+const moveNorthButton = document.getElementById('moveNorth');
+const moveSouthButton = document.getElementById('moveSouth');
+const moveWestButton = document.getElementById('moveWest');
+const moveEastButton = document.getElementById('moveEast');
+const deviceCoordsLabel = document.getElementById('deviceCoords');
+const poiCoordsLabel = document.getElementById('poiCoords');
 
 setFakeButton.addEventListener('click', () => {
-    const fakeLat = parseFloat(document.getElementById('fakeLat').value);
-    const fakeLon = parseFloat(document.getElementById('fakeLon').value);
+    const fakeLat = parseFloat(fakeLatInput.value);
+    const fakeLon = parseFloat(fakeLonInput.value);
 
     if (Number.isNaN(fakeLat) || Number.isNaN(fakeLon)) {
         alert('Please enter valid numeric latitude / longitude values.');
@@ -101,8 +125,14 @@ setFakeButton.addEventListener('click', () => {
 
 resumeRealGpsButton.addEventListener('click', () => {
     alert('Resuming real GPS updates');
+    deviceCoordsLabel.textContent = 'waiting for GPS…';
     locar.startGps();
 });
+
+moveNorthButton.addEventListener('click', () => adjustPoiByMeters(MOVEMENT_STEP_METERS, 0));
+moveSouthButton.addEventListener('click', () => adjustPoiByMeters(-MOVEMENT_STEP_METERS, 0));
+moveWestButton.addEventListener('click', () => adjustPoiByMeters(0, -MOVEMENT_STEP_METERS));
+moveEastButton.addEventListener('click', () => adjustPoiByMeters(0, MOVEMENT_STEP_METERS));
 
 // === Render loop ============================================================
 renderer.setAnimationLoop(animate);
@@ -120,5 +150,46 @@ function createPoiMarker() {
     const mesh = new THREE.Mesh(geometry, material);
     mesh.name = 'Example POI';
     return mesh;
+}
+
+// Update the POI mesh position after its latitude / longitude changes.
+function updatePoiPosition() {
+    if (!poiPlaced || !poiMesh) {
+        return;
+    }
+
+    const [x, z] = locar.lonLatToWorldCoords(poiState.longitude, poiState.latitude);
+    poiMesh.position.x = x;
+    poiMesh.position.z = z;
+}
+
+// Keep the latitude / longitude inputs in sync with the POI state.
+function syncPoiInputs() {
+    fakeLatInput.value = poiState.latitude.toFixed(8);
+    fakeLonInput.value = poiState.longitude.toFixed(8);
+    poiCoordsLabel.textContent = `${poiState.latitude.toFixed(6)}°, ${poiState.longitude.toFixed(6)}°`;
+}
+
+// Move the POI north/south (deltaNorthMeters) and east/west (deltaEastMeters).
+function adjustPoiByMeters(deltaNorthMeters, deltaEastMeters) {
+    if (!poiPlaced || !poiMesh) {
+        alert('The AR scene is still initialising. Try again when the red marker is visible.');
+        return;
+    }
+
+    const METERS_PER_DEGREE_LAT = 111132; // Good approximation for small deltas.
+    const metersPerDegreeLon = Math.max(Math.cos(poiState.latitude * Math.PI / 180) * METERS_PER_DEGREE_LAT, 1e-6);
+
+    poiState.latitude += deltaNorthMeters / METERS_PER_DEGREE_LAT;
+    poiState.longitude += deltaEastMeters / metersPerDegreeLon;
+
+    updatePoiPosition();
+    syncPoiInputs();
+}
+
+function updateDeviceLabel(latitude, longitude) {
+    if (Number.isFinite(latitude) && Number.isFinite(longitude)) {
+        deviceCoordsLabel.textContent = `${latitude.toFixed(6)}°, ${longitude.toFixed(6)}°`;
+    }
 }
 
