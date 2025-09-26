@@ -12,8 +12,16 @@ const INITIAL_POI_COORDINATES = {
 // Amount of movement (in metres) applied every time a direction button is pressed.
 const MOVEMENT_STEP_METERS = 5;
 
-// Friendly colour to make the POI stand out against the camera feed.
-const POI_COLOUR = 0xff3366;
+// Colours used for each cube face so orientation changes are easy to spot.
+const POI_FACE_COLOURS = [
+    0xff3366,
+    0xffc53d,
+    0x4fd1c5,
+    0x38a169,
+    0x667eea,
+    0xf687b3
+];
+const POI_FACE_OPACITY = 0.6;
 
 // === Scene and renderer setup ==============================================
 const camera = new THREE.PerspectiveCamera(80, window.innerWidth / window.innerHeight, 0.001, 1000);
@@ -153,8 +161,18 @@ function animate() {
 // Helper creates the POI mesh so it is only constructed when needed.
 function createPoiMarker() {
     const geometry = new THREE.BoxGeometry(12, 12, 12);
-    const material = new THREE.MeshBasicMaterial({ color: POI_COLOUR, opacity: 0.85, transparent: true });
-    const mesh = new THREE.Mesh(geometry, material);
+    const faceMaterials = POI_FACE_COLOURS.map(colour => new THREE.MeshBasicMaterial({
+        color: colour,
+        opacity: POI_FACE_OPACITY,
+        transparent: true
+    }));
+
+    const mesh = new THREE.Mesh(geometry, faceMaterials);
+
+    const edgeMaterial = new THREE.LineBasicMaterial({ color: 0xffffff, opacity: 0.3, transparent: true });
+    const edges = new THREE.EdgesGeometry(geometry);
+    mesh.add(new THREE.LineSegments(edges, edgeMaterial));
+
     mesh.name = 'Example POI';
     return mesh;
 }
