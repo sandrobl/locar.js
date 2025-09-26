@@ -3,7 +3,7 @@ html, body {
     height: 100%;
 }
 
-#gpsinput > div {
+.gpsinput-body > div {
     display: flex;
     justify-content: center;
 }
@@ -27,24 +27,58 @@ main {
     background-color: #c0c0c0; 
 }
 
+.gpsinput-toggle {
+    align-self: flex-end;
+    background: rgba(0, 0, 0, 0.45);
+    color: #fff;
+    border: none;
+    padding: 6px 12px;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    border-bottom-left-radius: 6px;
+    cursor: pointer;
+}
+
+.gpsinput-toggle:focus {
+    outline: 2px solid #fff;
+    outline-offset: 2px;
+}
+
+.gpsinput-body {
+    padding: 8px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+#gpsinput.gpsinput-collapsed .gpsinput-body {
+    display: none;
+}
+
+#gpsinput.gpsinput-collapsed .gpsinput-toggle {
+    border-bottom-left-radius: 0;
+}
+
 @media only screen and (orientation: landscape) {
     #gpsinput {
         flex-direction: row;
         justify-content: center;
     }
 
-    #gpsinput input, #gpsinput button {
+    .gpsinput-body input, .gpsinput-body button {
         margin: 10px;
     }
 }
 
 @media only screen and ((max-device-width: 768px) and (orientation: portrait)) {
-    #gpsinput input, #gpsinput button {
+    .gpsinput-body input, .gpsinput-body button {
         font-size: 150%;
     }
 }
 @media only screen and ((max-device-height: 768px) and (orientation: landscape)) {
-    #gpsinput input, #gpsinput button {
+    .gpsinput-body input, .gpsinput-body button {
         font-size: 120%;
     }
 }

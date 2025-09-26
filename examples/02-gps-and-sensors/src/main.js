@@ -121,6 +121,8 @@ const removePoiButton = document.getElementById('removePoi');
 const spawnPoiAtDeviceButton = document.getElementById('spawnPoiAtDevice');
 const deviceCoordsLabel = document.getElementById('deviceCoords');
 const poiCoordsLabel = document.getElementById('poiCoords');
+const gpsInputContainer = document.getElementById('gpsinput');
+const gpsInputToggle = document.getElementById('gpsinputToggle');
 
 setFakeButton.addEventListener('click', () => {
     const fakeLat = parseFloat(fakeLatInput.value);
@@ -148,6 +150,15 @@ moveWestButton.addEventListener('click', () => adjustPoiByMeters(0, -MOVEMENT_ST
 moveEastButton.addEventListener('click', () => adjustPoiByMeters(0, MOVEMENT_STEP_METERS));
 removePoiButton.addEventListener('click', removePoi);
 spawnPoiAtDeviceButton.addEventListener('click', spawnPoiAtDeviceLocation);
+
+if (gpsInputToggle && gpsInputContainer) {
+    gpsInputToggle.addEventListener('click', () => {
+        const collapsed = gpsInputContainer.classList.toggle('gpsinput-collapsed');
+        gpsInputToggle.setAttribute('aria-expanded', (!collapsed).toString());
+        gpsInputToggle.textContent = collapsed ? '► Controls' : '▼ Controls';
+        gpsInputToggle.title = collapsed ? 'Show testing controls' : 'Hide testing controls';
+    });
+}
 
 // === Render loop ============================================================
 renderer.setAnimationLoop(animate);

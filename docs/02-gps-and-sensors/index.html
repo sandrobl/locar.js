@@ -6,43 +6,46 @@
 <title>LocAR.js example 2</title>
 <!-- Re-use the shared page styling for buttons and layout -->
 <!-- Load the AR example logic -->
-  <script type="module" crossorigin src="/locar.js/assets/02-gps-and-sensors-DggrmIU-.js"></script>
+  <script type="module" crossorigin src="/locar.js/assets/02-gps-and-sensors-Cy91tQo1.js"></script>
   <link rel="modulepreload" crossorigin href="/locar.js/assets/modulepreload-polyfill-B5Qt9EMX.js">
   <link rel="modulepreload" crossorigin href="/locar.js/assets/three.module-jZqFDccH.js">
   <link rel="modulepreload" crossorigin href="/locar.js/assets/locar.es-CLGu3crh.js">
-  <link rel="stylesheet" crossorigin href="/locar.js/assets/style-D1ozsMkJ.css">
+  <link rel="stylesheet" crossorigin href="/locar.js/assets/style-CkmAfcfR.css">
 </head>
 <body>
 <main>
 
 	<!-- Simple form to override the current GPS position during testing -->
-	<div id="gpsinput">
-		<div><input id="fakeLat" placeholder="Latitude" value="47.41047675920058" /></div>
-		<div><input id="fakeLon" placeholder="Longitude" value="9.332869851461123" /></div>
-		<div><button id="setFakeLoc">Use fake location</button></div>
-		<div><button id="resumeRealGps">Resume real GPS</button></div>
+	<div id="gpsinput" class="gpsinput-expanded">
+		<button id="gpsinputToggle" class="gpsinput-toggle" aria-expanded="true" aria-controls="gpsinputContent" title="Hide testing controls">▼ Controls</button>
+		<div id="gpsinputContent" class="gpsinput-body">
+			<div><input id="fakeLat" placeholder="Latitude" value="47.41047675920058" /></div>
+			<div><input id="fakeLon" placeholder="Longitude" value="9.332869851461123" /></div>
+			<div><button id="setFakeLoc">Use fake location</button></div>
+			<div><button id="resumeRealGps">Resume real GPS</button></div>
 
-		<!-- Controls to nudge the POI in cardinal directions by a small offset -->
-		<div class="movement-controls">
-			<div class="movement-row"><button id="moveNorth">↑ Move north</button></div>
-			<div class="movement-row">
-				<button id="moveWest">← Move west</button>
-				<button id="moveSouth">↓ Move south</button>
-				<button id="moveEast">→ Move east</button>
+			<!-- Controls to nudge the POI in cardinal directions by a small offset -->
+			<div class="movement-controls">
+				<div class="movement-row"><button id="moveNorth">↑ Move north</button></div>
+				<div class="movement-row">
+					<button id="moveWest">← Move west</button>
+					<button id="moveSouth">↓ Move south</button>
+					<button id="moveEast">→ Move east</button>
+				</div>
 			</div>
-		</div>
 
-		<div class="poi-management">
-			<button id="removePoi">Remove cube</button>
-			<button id="spawnPoiAtDevice">Spawn cube at device location</button>
-		</div>
+			<div class="poi-management">
+				<button id="removePoi">Remove cube</button>
+				<button id="spawnPoiAtDevice">Spawn cube at device location</button>
+			</div>
 
-		<!-- Telemetry readout for both the device and the POI -->
-		<section class="location-readout">
-			<h2>Live coordinates</h2>
-			<p><strong>Device:</strong> <span id="deviceCoords">waiting for GPS…</span></p>
-			<p><strong>Red cube:</strong> <span id="poiCoords">47.41047676°, 9.33286985°</span></p>
-		</section>
+			<!-- Telemetry readout for both the device and the POI -->
+			<section class="location-readout">
+				<h2>Live coordinates</h2>
+				<p><strong>Device:</strong> <span id="deviceCoords">waiting for GPS…</span></p>
+				<p><strong>Red cube:</strong> <span id="poiCoords">47.41047676°, 9.33286985°</span></p>
+			</section>
+		</div>
 	</div>
 
 	<!-- Three.js renders into this canvas -->
