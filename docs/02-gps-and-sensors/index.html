@@ -6,7 +6,7 @@
 <title>LocAR.js example 2</title>
 <!-- Re-use the shared page styling for buttons and layout -->
 <!-- Load the AR example logic -->
-  <script type="module" crossorigin src="/locar.js/assets/02-gps-and-sensors-B1cZuHlO.js"></script>
+  <script type="module" crossorigin src="/locar.js/assets/02-gps-and-sensors-CML8M--P.js"></script>
   <link rel="modulepreload" crossorigin href="/locar.js/assets/modulepreload-polyfill-B5Qt9EMX.js">
   <link rel="modulepreload" crossorigin href="/locar.js/assets/three.module-Cg0hSL1k.js">
   <link rel="modulepreload" crossorigin href="/locar.js/assets/locar.es-CLGu3crh.js">
@@ -30,6 +30,11 @@
 				<button id="moveSouth">↓ Move south</button>
 				<button id="moveEast">→ Move east</button>
 			</div>
+		</div>
+
+		<div class="poi-management">
+			<button id="removePoi">Remove cube</button>
+			<button id="spawnPoiAtDevice">Spawn cube at device location</button>
 		</div>
 
 		<!-- Telemetry readout for both the device and the POI -->

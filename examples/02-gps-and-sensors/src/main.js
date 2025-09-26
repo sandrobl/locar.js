@@ -59,6 +59,9 @@ const poiState = {
     latitude: INITIAL_POI_COORDINATES.latitude,
     longitude: INITIAL_POI_COORDINATES.longitude
 };
+
+// Store the most recent device coordinates so we can spawn the cube there on demand.
+let lastDeviceCoords = null;
 const deviceOrientationControls = new LocAR.DeviceOrientationControls(camera);
 
 deviceOrientationControls.on('deviceorientationgranted', ev => {
@@ -106,6 +109,8 @@ const moveNorthButton = document.getElementById('moveNorth');
 const moveSouthButton = document.getElementById('moveSouth');
 const moveWestButton = document.getElementById('moveWest');
 const moveEastButton = document.getElementById('moveEast');
+const removePoiButton = document.getElementById('removePoi');
+const spawnPoiAtDeviceButton = document.getElementById('spawnPoiAtDevice');
 const deviceCoordsLabel = document.getElementById('deviceCoords');
 const poiCoordsLabel = document.getElementById('poiCoords');
 
@@ -133,6 +138,8 @@ moveNorthButton.addEventListener('click', () => adjustPoiByMeters(MOVEMENT_STEP_
 moveSouthButton.addEventListener('click', () => adjustPoiByMeters(-MOVEMENT_STEP_METERS, 0));
 moveWestButton.addEventListener('click', () => adjustPoiByMeters(0, -MOVEMENT_STEP_METERS));
 moveEastButton.addEventListener('click', () => adjustPoiByMeters(0, MOVEMENT_STEP_METERS));
+removePoiButton.addEventListener('click', removePoi);
+spawnPoiAtDeviceButton.addEventListener('click', spawnPoiAtDeviceLocation);
 
 // === Render loop ============================================================
 renderer.setAnimationLoop(animate);
@@ -167,7 +174,11 @@ function updatePoiPosition() {
 function syncPoiInputs() {
     fakeLatInput.value = poiState.latitude.toFixed(8);
     fakeLonInput.value = poiState.longitude.toFixed(8);
-    poiCoordsLabel.textContent = `${poiState.latitude.toFixed(6)}°, ${poiState.longitude.toFixed(6)}°`;
+    if (poiPlaced) {
+        poiCoordsLabel.textContent = `${poiState.latitude.toFixed(6)}°, ${poiState.longitude.toFixed(6)}°`;
+    } else {
+        poiCoordsLabel.textContent = 'none';
+    }
 }
 
 // Move the POI north/south (deltaNorthMeters) and east/west (deltaEastMeters).
@@ -190,6 +201,38 @@ function adjustPoiByMeters(deltaNorthMeters, deltaEastMeters) {
 function updateDeviceLabel(latitude, longitude) {
     if (Number.isFinite(latitude) && Number.isFinite(longitude)) {
         deviceCoordsLabel.textContent = `${latitude.toFixed(6)}°, ${longitude.toFixed(6)}°`;
+        lastDeviceCoords = { latitude, longitude };
     }
+}
+
+function removePoi() {
+    if (!poiPlaced || !poiMesh) {
+        alert('No cube to remove right now.');
+        return;
+    }
+
+    scene.remove(poiMesh);
+    poiMesh = null;
+    poiPlaced = false;
+    syncPoiInputs();
+}
+
+function spawnPoiAtDeviceLocation() {
+    if (!lastDeviceCoords) {
+        alert('Device location not available yet. Wait for GPS before spawning the cube.');
+        return;
+    }
+
+    if (poiPlaced && poiMesh) {
+        scene.remove(poiMesh);
+    }
+
+    poiState.latitude = lastDeviceCoords.latitude;
+    poiState.longitude = lastDeviceCoords.longitude;
+
+    poiMesh = createPoiMarker();
+    locar.add(poiMesh, poiState.longitude, poiState.latitude);
+    poiPlaced = true;
+    syncPoiInputs();
 }
 
