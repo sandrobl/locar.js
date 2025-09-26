@@ -1,21 +1,27 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!-- Viewport settings keep the UI consistent on mobile while testing GPS/AR -->
 <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, minimum-scale=1, maximum-scale=1" />
 <title>LocAR.js example 2</title>
+<!-- Re-use the shared page styling for buttons and layout -->
 <link rel='stylesheet' type='text/css' href='../css/style.css' />
+<!-- Load the AR example logic -->
 <script type='module' src='src/main.js'></script>
 </head>
 <body>
 <main>
 
-<div id="gpsinput">
-<div><input id="fakeLat" placeholder="Fake Lat" /></div>
-<div><input id="fakeLon" placeholder="Fake Lon"/></div>
-<div><button id="setFakeLoc">Set Fake Location!</button></div>
-</div>
+	<!-- Simple form to override the current GPS position during testing -->
+	<div id="gpsinput">
+		<div><input id="fakeLat" placeholder="Latitude" value="47.41047675920058" /></div>
+		<div><input id="fakeLon" placeholder="Longitude" value="9.332869851461123" /></div>
+		<div><button id="setFakeLoc">Use fake location</button></div>
+		<div><button id="resumeRealGps">Resume real GPS</button></div>
+	</div>
 
-<canvas id="glscene"></canvas>
+	<!-- Three.js renders into this canvas -->
+	<canvas id="glscene"></canvas>
 
 </main>
 </body>
