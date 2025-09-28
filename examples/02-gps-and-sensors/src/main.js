@@ -88,14 +88,18 @@ locar.on('gpserror', error => {
 });
 
 locar.on('gpsupdate', ev => {
+    const { latitude, longitude } = ev.position.coords;
+
     if (firstLocation) {
-        alert(`Got the initial location: longitude ${ev.position.coords.longitude}, latitude ${ev.position.coords.latitude}`);
+        alert(`Got the initial location: longitude ${longitude}, latitude ${latitude}`);
         firstLocation = false;
     }
 
-    updateDeviceLabel(ev.position.coords.latitude, ev.position.coords.longitude);
+    updateDeviceLabel(latitude, longitude);
 
     if (!poiPlaced) {
+        poiState.latitude = latitude;
+        poiState.longitude = longitude;
         poiMesh = createPoiMarker();
         locar.add(poiMesh, poiState.longitude, poiState.latitude);
         poiPlaced = true;
@@ -118,7 +122,7 @@ const moveSouthButton = document.getElementById('moveSouth');
 const moveWestButton = document.getElementById('moveWest');
 const moveEastButton = document.getElementById('moveEast');
 const removePoiButton = document.getElementById('removePoi');
-const spawnPoiAtDeviceButton = document.getElementById('spawnPoiAtDevice');
+const resetPoiButton = document.getElementById('resetPoi');
 const deviceCoordsLabel = document.getElementById('deviceCoords');
 const poiCoordsLabel = document.getElementById('poiCoords');
 const gpsInputContainer = document.getElementById('gpsinput');
@@ -149,7 +153,7 @@ moveSouthButton.addEventListener('click', () => adjustPoiByMeters(-MOVEMENT_STEP
 moveWestButton.addEventListener('click', () => adjustPoiByMeters(0, -MOVEMENT_STEP_METERS));
 moveEastButton.addEventListener('click', () => adjustPoiByMeters(0, MOVEMENT_STEP_METERS));
 removePoiButton.addEventListener('click', removePoi);
-spawnPoiAtDeviceButton.addEventListener('click', spawnPoiAtDeviceLocation);
+resetPoiButton.addEventListener('click', resetPoiToDeviceLocation);
 
 if (gpsInputToggle && gpsInputContainer) {
     gpsInputToggle.addEventListener('click', () => {
@@ -246,22 +250,23 @@ function removePoi() {
     syncPoiInputs();
 }
 
-function spawnPoiAtDeviceLocation() {
+function resetPoiToDeviceLocation() {
     if (!lastDeviceCoords) {
-        alert('Device location not available yet. Wait for GPS before spawning the cube.');
+        alert('Device location not available yet. Wait for GPS before resetting the cube.');
         return;
-    }
-
-    if (poiPlaced && poiMesh) {
-        scene.remove(poiMesh);
     }
 
     poiState.latitude = lastDeviceCoords.latitude;
     poiState.longitude = lastDeviceCoords.longitude;
 
-    poiMesh = createPoiMarker();
-    locar.add(poiMesh, poiState.longitude, poiState.latitude);
-    poiPlaced = true;
+    if (!poiPlaced || !poiMesh) {
+        poiMesh = createPoiMarker();
+        locar.add(poiMesh, poiState.longitude, poiState.latitude);
+        poiPlaced = true;
+    } else {
+        updatePoiPosition();
+    }
+
     syncPoiInputs();
 }
 
