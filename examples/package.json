@@ -4,6 +4,7 @@
     "aframe-look-at-component": "^1.0.0",
     "locar": "0.1.0",
     "locar-aframe": "0.1.0",
+    "proj4": "^2.10.0",
     "three": "^0.180.0"
   },
   "devDependencies": {

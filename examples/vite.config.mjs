@@ -3,7 +3,7 @@ import { resolve } from 'path';
 import mkcert from 'vite-plugin-mkcert';
 
 const entries = { main: 'index.html' };
-['01-helloworld', '02-gps-and-sensors', '03-api-communication', 'devorient'].forEach ( example => {
+['01-helloworld', '02-gps-and-sensors', 'devorient'].forEach ( example => {
     entries[example] = resolve(__dirname, `${example}/index.html`);
 });
 

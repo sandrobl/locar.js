@@ -12,6 +12,20 @@
 <body>
 <main>
 
+	<button id="projectedToggle" class="projected-toggle" aria-expanded="false" aria-controls="projectedPanel" title="Show projected buildings">☰ Projected buildings</button>
+	<aside id="projectedPanel" class="projected-panel" aria-hidden="true">
+		<header class="projected-header">
+			<h2>Projected buildings</h2>
+			<button id="projectedClose" class="projected-close" type="button" aria-label="Close projected buildings menu">×</button>
+		</header>
+		<section class="projected-body">
+			<button id="projectedAuthButton" class="projected-auth-button" type="button">Enter Basic auth token</button>
+			<p id="projectedAuthStatus" class="projected-auth-status" aria-live="polite">No credentials stored.</p>
+			<p id="projectedStatus" class="projected-status">Open the menu to load projected buildings near the current location.</p>
+			<ul id="projectedList" class="projected-list" aria-live="polite"></ul>
+		</section>
+	</aside>
+
 	<!-- Simple form to override the current GPS position during testing -->
 	<div id="gpsinput" class="gpsinput-expanded">
 		<button id="gpsinputToggle" class="gpsinput-toggle" aria-expanded="true" aria-controls="gpsinputContent" title="Hide testing controls">▼ Controls</button>

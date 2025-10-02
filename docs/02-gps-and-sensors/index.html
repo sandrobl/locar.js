@@ -6,13 +6,27 @@
 <title>LocAR.js example 2</title>
 <!-- Re-use the shared page styling for buttons and layout -->
 <!-- Load the AR example logic -->
-  <script type="module" crossorigin src="/locar.js/assets/02-gps-and-sensors-iCZgGQqJ.js"></script>
+  <script type="module" crossorigin src="/locar.js/assets/02-gps-and-sensors-BxzIL-WG.js"></script>
   <link rel="modulepreload" crossorigin href="/locar.js/assets/modulepreload-polyfill-B5Qt9EMX.js">
-  <link rel="modulepreload" crossorigin href="/locar.js/assets/locar.es-CoMYR9AI.js">
-  <link rel="stylesheet" crossorigin href="/locar.js/assets/style-CkmAfcfR.css">
+  <link rel="modulepreload" crossorigin href="/locar.js/assets/locar.es-BoeRNTBB.js">
+  <link rel="stylesheet" crossorigin href="/locar.js/assets/02-gps-and-sensors-kap8ngIy.css">
 </head>
 <body>
 <main>
+
+	<button id="projectedToggle" class="projected-toggle" aria-expanded="false" aria-controls="projectedPanel" title="Show projected buildings">☰ Projected buildings</button>
+	<aside id="projectedPanel" class="projected-panel" aria-hidden="true">
+		<header class="projected-header">
+			<h2>Projected buildings</h2>
+			<button id="projectedClose" class="projected-close" type="button" aria-label="Close projected buildings menu">×</button>
+		</header>
+		<section class="projected-body">
+			<button id="projectedAuthButton" class="projected-auth-button" type="button">Enter Basic auth token</button>
+			<p id="projectedAuthStatus" class="projected-auth-status" aria-live="polite">No credentials stored.</p>
+			<p id="projectedStatus" class="projected-status">Open the menu to load projected buildings near the current location.</p>
+			<ul id="projectedList" class="projected-list" aria-live="polite"></ul>
+		</section>
+	</aside>
 
 	<!-- Simple form to override the current GPS position during testing -->
 	<div id="gpsinput" class="gpsinput-expanded">
