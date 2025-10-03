@@ -6,8 +6,8 @@ import proj4 from 'proj4';
 // Dedicated point-of-interest used in this scenario. Only this location will
 // be visualised so the behaviour is predictable while testing.
 const INITIAL_POI_COORDINATES = {
-    latitude: 47.41047675920058,
-    longitude: 9.332869851461123
+    latitude: 47.410139353884134,
+    longitude: 9.332826022676095
 };
 
 // Amount of movement (in metres) applied every time a direction button is pressed.
